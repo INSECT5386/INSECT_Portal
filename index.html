@@ -14,7 +14,6 @@
             color: #333;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s, color 0.3s;
         }
         header {
             background-color: #005f73;
@@ -27,7 +26,7 @@
             font-size: 36px;
             margin: 0;
         }
-        .gcse-search, .search-box {
+        .gcse-search {
             max-width: 600px;
             margin: 40px auto;
             padding: 10px;
@@ -35,13 +34,13 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .gcse-search input[type="text"], .search-box input[type="text"] {
+        .gcse-search input[type="text"] {
             border: 2px solid #005f73;
             padding: 10px;
             width: 100%;
             border-radius: 4px;
         }
-        .gcse-search input[type="submit"], .search-box button {
+        .gcse-search input[type="submit"] {
             background-color: #005f73;
             color: white;
             border: none;
@@ -57,19 +56,15 @@
             position: fixed;
             width: 100%;
             bottom: 0;
-            z-index: 1;
         }
 
         @media (max-width: 768px) {
             header h1 {
                 font-size: 28px;
             }
-            .gcse-search, .search-box {
+            .gcse-search {
                 max-width: 100%;
                 padding: 15px;
-            }
-            footer button {
-                width: 100%;
             }
         }
 
@@ -123,7 +118,7 @@
         }
     </style>
 </head>
-<body class="light-mode">
+<body>
 
     <div class="loader" id="loader"></div>
 
@@ -132,16 +127,9 @@
         <button id="theme-toggle">다크 모드</button>
     </header>
 
-    <!-- Google Custom Search -->
     <div class="gcse-search scroll-fade-in">
         <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
-        <div class="gcse-searchresults"></div>
-    </div>
-
-    <!-- 일반 검색창 -->
-    <div class="search-box scroll-fade-in">
-        <input type="text" id="search-input" placeholder="검색어를 입력하세요" onkeypress="checkEnter(event)">
-        <button onclick="search()">검색</button>
+        <div class="gcse-search"></div>
     </div>
 
     <div class="scroll-fade-in">
@@ -186,21 +174,6 @@
             const text = 'INSECT 검색 엔진';
             const twitterUrl = `https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
             window.open(twitterUrl, '_blank');
-        }
-
-        // 일반 검색 함수
-        function search() {
-            const query = document.getElementById('search-input').value;
-            if (query) {
-                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-            }
-        }
-
-        // Enter 키로 검색 실행
-        function checkEnter(event) {
-            if (event.key === 'Enter') {
-                search();
-            }
         }
     </script>
 
