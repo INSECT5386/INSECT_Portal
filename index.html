@@ -27,31 +27,22 @@
             font-size: 32px;
             margin: 0;
         }
-        .search-container {
+        .gcse-search {
             max-width: 90%;
             margin: 30px auto;
-            padding: 15px;
+            padding: 10px;
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
-        .search-box {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .search-box input {
-            flex: 1;
+        .gcse-search input[type="text"] {
             border: 2px solid #005f73;
             padding: 10px;
+            width: 100%;
             border-radius: 4px;
             font-size: 16px;
         }
-        .search-box button {
+        .gcse-search input[type="submit"] {
             background-color: #005f73;
             color: white;
             border: none;
@@ -93,15 +84,13 @@
             header h1 {
                 font-size: 24px;
             }
-            .search-container {
+            .gcse-search {
                 max-width: 95%;
                 padding: 15px;
             }
-            .search-box {
-                flex-direction: column;
-            }
-            .search-box button {
-                width: 100%;
+            #language-switcher {
+                display: flex;
+                justify-content: center;
             }
             #dark-mode-toggle {
                 font-size: 16px;
@@ -132,14 +121,9 @@
     <!-- Dark Mode Toggle -->
     <button id="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
 
-    <!-- 검색 입력창 및 버튼 -->
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="검색어를 입력하세요..." onkeypress="handleKeyPress(event)">
-            <button onclick="search()">검색</button>
-            <button onclick="searchInNewTab()">새 탭에서 검색</button>
-        </div>
-    </div>
+    <!-- Google Custom Search Engine -->
+    <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
+    <div class="gcse-search"></div>
 
     <footer>
         <p>© 2025 INSECT 검색 엔진</p>
@@ -178,26 +162,6 @@
             } else if (language === 'en') {
                 document.documentElement.lang = 'en';
                 document.title = 'INSECT Search Engine';
-            }
-        }
-
-        function search() {
-            let query = document.getElementById('search-input').value;
-            if (query) {
-                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-            }
-        }
-
-        function searchInNewTab() {
-            let query = document.getElementById('search-input').value;
-            if (query) {
-                window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
-            }
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                search();
             }
         }
 
