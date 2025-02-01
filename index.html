@@ -34,6 +34,7 @@
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-in-out;
         }
         .gcse-search input[type="text"] {
             border: 2px solid #005f73;
@@ -41,6 +42,11 @@
             width: 100%;
             border-radius: 4px;
             font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .gcse-search input[type="text"]:focus {
+            border-color: #008C9E;
+            box-shadow: 0 0 5px rgba(0, 140, 158, 0.6);
         }
         .gcse-search input[type="submit"] {
             background-color: #005f73;
@@ -50,6 +56,10 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .gcse-search input[type="submit"]:hover {
+            background-color: #008C9E;
         }
         footer {
             text-align: center;
@@ -69,6 +79,11 @@
             margin: 5px;
             font-size: 14px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #language-switcher button:hover {
+            background-color: #005f73;
+            color: white;
         }
         #dark-mode-toggle {
             position: fixed;
@@ -101,6 +116,17 @@
                 opacity: 0;
             }
             to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
                 opacity: 1;
             }
         }
