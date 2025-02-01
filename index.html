@@ -14,7 +14,7 @@
             color: #333;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s, color 0.3s;
+            transition: all 0.3s ease-in-out;
         }
         header {
             background-color: #005f73;
@@ -27,108 +27,67 @@
             font-size: 32px;
             margin: 0;
         }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
         .gcse-search {
-            max-width: 90%;
-            margin: 30px auto;
-            padding: 10px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            padding: 15px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             animation: slideIn 0.5s ease-in-out;
         }
         .gcse-search input[type="text"] {
             border: 2px solid #005f73;
-            padding: 10px;
+            padding: 12px;
             width: 100%;
-            border-radius: 4px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 18px;
             transition: all 0.3s ease;
-        }
-        .gcse-search input[type="text"]:focus {
-            border-color: #008C9E;
-            box-shadow: 0 0 5px rgba(0, 140, 158, 0.6);
         }
         .gcse-search input[type="submit"] {
             background-color: #005f73;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             transition: background-color 0.3s ease;
         }
         .gcse-search input[type="submit"]:hover {
             background-color: #008C9E;
+        }
+        #dark-mode-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            padding: 12px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        #dark-mode-toggle:hover {
+            transform: scale(1.1);
         }
         footer {
             text-align: center;
             padding: 15px;
             background-color: #333;
             color: white;
-            position: relative;
-            width: 100%;
-            bottom: 0;
-        }
-        #language-switcher {
-            text-align: center;
-            margin: 10px 0;
-        }
-        #language-switcher button {
-            padding: 12px 16px;
-            margin: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        #language-switcher button:hover {
-            background-color: #005f73;
-            color: white;
-        }
-        #dark-mode-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            padding: 10px;
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 24px;
-            }
-            .gcse-search {
-                max-width: 95%;
-                padding: 15px;
-            }
-            #language-switcher {
-                display: flex;
-                justify-content: center;
-            }
-            #dark-mode-toggle {
-                font-size: 16px;
-            }
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
         @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -138,41 +97,25 @@
         <h1><a href="/INSECTSEARCH/" style="color: white; text-decoration: none;">INSECT</a></h1>
     </header>
 
-    <!-- Language Switcher -->
-    <div id="language-switcher">
-        <button onclick="switchLanguage('ko')">🇰🇷 Korean</button>
-        <button onclick="switchLanguage('en')">🇺🇸 English</button>
+    <div class="search-container">
+        <div class="gcse-search"></div>
     </div>
 
-    <!-- Dark Mode Toggle -->
     <button id="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
-
-    <!-- Google Custom Search Engine -->
-    <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
-    <div class="gcse-search"></div>
 
     <footer>
         <p>© 2025 INSECT 검색 엔진</p>
     </footer>
 
     <script>
-        // 다크 모드 상태 유지
         let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
         function applyDarkMode() {
-            if (isDarkMode) {
-                document.body.style.backgroundColor = '#333';
-                document.body.style.color = '#fff';
-                document.querySelector('header').style.backgroundColor = '#222';
-                document.querySelector('footer').style.backgroundColor = '#222';
-                document.getElementById('dark-mode-toggle').textContent = '☀️';
-            } else {
-                document.body.style.backgroundColor = '#f4f7fc';
-                document.body.style.color = '#333';
-                document.querySelector('header').style.backgroundColor = '#005f73';
-                document.querySelector('footer').style.backgroundColor = '#333';
-                document.getElementById('dark-mode-toggle').textContent = '🌙';
-            }
+            document.body.style.backgroundColor = isDarkMode ? '#222' : '#f4f7fc';
+            document.body.style.color = isDarkMode ? '#fff' : '#333';
+            document.querySelector('header').style.backgroundColor = isDarkMode ? '#111' : '#005f73';
+            document.querySelector('footer').style.backgroundColor = isDarkMode ? '#111' : '#333';
+            document.getElementById('dark-mode-toggle').textContent = isDarkMode ? '☀️' : '🌙';
         }
 
         function toggleDarkMode() {
@@ -181,19 +124,7 @@
             applyDarkMode();
         }
 
-        function switchLanguage(language) {
-            if (language === 'ko') {
-                document.documentElement.lang = 'ko';
-                document.title = 'INSECT 검색 엔진';
-            } else if (language === 'en') {
-                document.documentElement.lang = 'en';
-                document.title = 'INSECT Search Engine';
-            }
-        }
-
-        // 다크 모드 초기화
         applyDarkMode();
     </script>
-
 </body>
 </html>
