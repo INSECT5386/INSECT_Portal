@@ -7,6 +7,7 @@
     <meta property="og:title" content="INSECT">
     <meta property="og:description" content="INSECT 검색 엔진">
     <title>INSECT 검색 엔진</title>
+    <link rel="manifest" href="manifest.json"> <!-- 매니페스트 파일 추가 -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -167,6 +168,17 @@
 
         // 페이지 로드 시 저장된 다크 모드 설정 적용
         applyDarkMode();
+
+        // 서비스 워커 등록
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(function(registration) {
+                    console.log('Service Worker 등록 성공:', registration);
+                })
+                .catch(function(error) {
+                    console.log('Service Worker 등록 실패:', error);
+                });
+        }
     </script>
 
 </body>
