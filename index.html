@@ -9,9 +9,10 @@
     <title>INSECT 검색 엔진</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
+        /* 전체 페이지 스타일 */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
             color: #333;
             margin: 0;
             padding: 0;
@@ -19,90 +20,104 @@
         }
         header {
             text-align: center;
-            padding: 20px 0;
+            padding: 30px 0;
         }
         h1 a {
-            color: #005f73;
+            color: #00796b;
             text-decoration: none;
-            font-size: 36px;
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
+
+        /* 검색창 스타일 */
         .search-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             width: 80%;
             max-width: 800px;
-            margin: 20px auto 0;
+            margin: 30px auto;
             animation: fadeIn 0.6s ease-in-out;
         }
+
         .gcse-search {
             width: 100%;
         }
-        
-        /* 검색 입력창 스타일 */
+
         .gcse-search input.gsc-input {
-            border-radius: 25px;
-            padding: 10px 15px;
-            border: 2px solid #005f73;
-            font-size: 16px;
+            border-radius: 30px;
+            padding: 12px 20px;
+            border: 2px solid #00796b;
+            font-size: 18px;
             transition: all 0.3s ease;
-        }
-        /* 포커스 시 강조 효과 */
-        .gcse-search input.gsc-input:focus {
-            border-color: #0a9396;
-            box-shadow: 0 0 8px rgba(10, 147, 150, 0.5);
-            outline: none;
-        }
-        /* 검색 버튼 스타일 */
-        .gcse-search button.gsc-search-button {
-            background-color: #005f73 !important;
-            color: white !important;
-            border-radius: 25px !important;
-            padding: 10px 15px !important;
-            transition: background-color 0.3s ease;
-        }
-        /* 버튼 호버 효과 */
-        .gcse-search button.gsc-search-button:hover {
-            background-color: #0a9396 !important;
+            width: 100%;
         }
 
-        /* 다크 모드 스타일 */
-        .dark-mode {
-            background-color: #222;
-            color: #fff;
+        .gcse-search input.gsc-input:focus {
+            border-color: #004d40;
+            box-shadow: 0 0 10px rgba(0, 77, 64, 0.3);
+            outline: none;
         }
+
+        .gcse-search button.gsc-search-button {
+            background-color: #00796b !important;
+            color: white !important;
+            border-radius: 30px !important;
+            padding: 12px 25px !important;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .gcse-search button.gsc-search-button:hover {
+            background-color: #004d40 !important;
+        }
+
+        /* 다크 모드 */
+        .dark-mode {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
         .dark-mode .search-container {
             background: #333;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
         }
+
         .dark-mode .gcse-search input.gsc-input {
             background-color: #444;
             color: white;
-            border-color: #0a9396;
-        }
-        .dark-mode .gcse-search button.gsc-search-button {
-            background-color: #0a9396 !important;
+            border-color: #004d40;
         }
 
+        .dark-mode .gcse-search button.gsc-search-button {
+            background-color: #004d40 !important;
+        }
+
+        /* 다크모드 전환 버튼 */
         #dark-mode-toggle {
             position: fixed;
-            top: 15px;
-            right: 15px;
-            padding: 10px;
-            background: none;
-            border: none;
-            font-size: 22px;
+            top: 20px;
+            right: 20px;
+            padding: 12px;
+            background: #fff;
+            border: 2px solid #00796b;
+            border-radius: 50%;
+            font-size: 24px;
             cursor: pointer;
             transition: transform 0.3s;
         }
+
         #dark-mode-toggle:hover {
-            transform: rotate(20deg);
+            transform: rotate(180deg);
         }
 
+        /* 애니메이션 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -116,8 +131,9 @@
 
         @media (max-width: 768px) {
             h1 a {
-                font-size: 28px;
+                font-size: 30px;
             }
+
             .search-container {
                 width: 95%;
             }
