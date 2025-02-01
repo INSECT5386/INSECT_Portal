@@ -1,8 +1,0 @@
-{
-  "name": "INSECT 검색 엔진",
-  "short_name": "INSECT",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#005f73"
-}
