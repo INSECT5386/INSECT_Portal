@@ -13,26 +13,34 @@
         /* 기본 스타일 */
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1d2b64, #f8cdda);  /* 그라데이션 배경 */
-            color: #333;
+            background: radial-gradient(circle, #ff7e5f, #feb47b); /* 밝은 그라데이션 배경 */
+            color: #333;  /* 텍스트를 더 어두운 색으로 변경 */
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
             transition: background-color 0.4s ease, color 0.4s ease;
-            overflow-x: hidden; /* 화면 가로 넘침 방지 */
         }
 
         header {
             text-align: center;
-            padding: 2vh 0;  /* 상단 패딩을 줄여서 입력창과의 거리를 좁힘 */
-            font-size: 5vw;  /* 화면 너비에 비례 */
+            padding: 10vh 0;
+            font-size: 10vw;
+            color: #ffffff;  /* 텍스트 색상 변경 */
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 900;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        header:hover {
+            transform: rotate(-3deg); /* 미세한 회전 효과 */
+            color: #004d40;  /* 색상 변환 */
         }
 
         h1 a {
-            color: #fff; /* 흰색 로고 */
+            color: inherit;
             text-decoration: none;
-            font-size: 10vw;  /* 화면 너비에 비례 */
-            font-weight: 700;
-            text-transform: uppercase;
+            font-size: 10vw;
             transition: color 0.3s ease;
         }
 
@@ -46,47 +54,51 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 7vh 5vw;  /* 패딩을 조금 더 여유있게 설정 */
+            background: rgba(255, 255, 255, 0.8); /* 투명한 밝은 배경 */
+            padding: 7vh 5vw;
             border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            width: 95vw;  /* 화면 너비에 비례하여 길이 늘리기 */
-            max-width: 700px; /* 최대 너비를 더 넓게 설정 */
-            margin: 2vh auto; /* 상단으로 더 가까이 이동 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* 밝은 그림자 */
+            width: 90vw;
+            max-width: 700px;
+            margin: 2vh auto;
             animation: fadeIn 0.6s ease-in-out;
+            transition: transform 0.3s ease;
+        }
+
+        .search-container:hover {
+            transform: scale(1.05); /* 마우스 오버시 검색창 확대 효과 */
         }
 
         .gcse-search input.gsc-input {
             border-radius: 50px;
-            padding: 3vh 5vw;  /* 입력창에 비례한 패딩 */
-            border: 2px solid #00796b;
-            font-size: 4vw;  /* 화면 너비에 비례 */
+            padding: 20px;
+            border: 2px solid #feb47b;  /* 밝은 오렌지 색상 */
+            font-size: 4vw;
             transition: all 0.3s ease;
             width: 100%;
-            background-color: white;
+            background-color: #fff;
             color: #333;
         }
 
         .gcse-search input.gsc-input:focus {
-            border-color: #004d40;
-            box-shadow: 0 0 15px rgba(0, 77, 64, 0.3);
+            border-color: #ff7e5f;
+            box-shadow: 0 0 15px rgba(255, 126, 95, 0.3);
             outline: none;
             transform: scale(1.05);
         }
 
         .gcse-search button.gsc-search-button {
-            background-color: #00796b !important;
+            background-color: #ff7e5f !important;
             color: white !important;
             border-radius: 50px !important;
-            padding: 3vh 6vw !important;  /* 버튼 크기 자동 조정 */
-            font-size: 4vw;  /* 화면 너비에 비례 */
+            padding: 20px 40px !important;
+            font-size: 4vw;
             margin-top: 4vh;
             transition: background-color 0.3s ease, transform 0.2s;
         }
 
         .gcse-search button.gsc-search-button:hover {
-            background-color: #004d40 !important;
+            background-color: #feb47b !important;
             transform: scale(1.1);
         }
 
@@ -104,39 +116,39 @@
         /* 모바일 대응 */
         @media (max-width: 768px) {
             header {
-                font-size: 7vw; /* 화면에 맞게 폰트 크기 조정 */
+                font-size: 8vw;
             }
 
             .gcse-search input.gsc-input {
-                font-size: 5vw; /* 모바일에 맞게 폰트 크기 조정 */
+                font-size: 5vw;
             }
 
             .gcse-search button.gsc-search-button {
-                font-size: 5vw; /* 모바일에 맞게 버튼 크기 조정 */
+                font-size: 5vw;
             }
 
             .search-container {
+                padding: 10vw 5vw;
                 width: 90vw;
-                padding: 10vw 5vw;  /* 패딩을 좀 더 여유있게 설정 */
             }
         }
 
         /* 데스크탑 대응 */
         @media (min-width: 769px) {
             header {
-                font-size: 5vw; /* 데스크탑에서의 폰트 크기 조정 */
+                font-size: 5vw;
             }
 
             .gcse-search input.gsc-input {
-                font-size: 3vw; /* 데스크탑에 맞게 폰트 크기 조정 */
+                font-size: 3vw;
             }
 
             .gcse-search button.gsc-search-button {
-                font-size: 3vw; /* 데스크탑에 맞게 버튼 크기 조정 */
+                font-size: 3vw;
             }
 
             .search-container {
-                padding: 7vh 5vw; /* 여유있는 패딩 */
+                padding: 7vh 5vw;
             }
         }
     </style>
