@@ -89,22 +89,68 @@
             opacity: 1;
         }
 
-        /* 버튼 스타일 */
-        .send-button {
+        /* 계산기 스타일 */
+        .calculator {
+            font-size: 18px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calculator input {
+            grid-column: span 4;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .calculator button {
+            padding: 15px;
+            font-size: 18px;
             background-color: #ff7e5f;
             color: white;
-            padding: 10px;
-            border-radius: 20px;
-            margin-top: 10px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
             border: none;
+            border-radius: 10px;
+            cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .send-button:hover {
+        .calculator button:hover {
             background-color: #feb47b;
+        }
+
+        /* 메모 기능 스타일 */
+        .memo {
+            margin-top: 10px;
+        }
+
+        .memo textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .memo button {
+            margin-top: 10px;
+            background-color: #ff7e5f;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .memo button:hover {
+            background-color: #feb47b;
+        }
+
+        /* 도움말 스타일 */
+        .help {
+            margin-top: 10px;
         }
 
     </style>
@@ -117,13 +163,50 @@
     <!-- 탭들 -->
     <div class="tabs">
         <div class="tab active" onclick="showTab('search')">검색</div>
-        <div class="tab" onclick="showTab('link')">링크 복사</div> <!-- '소개' -> '링크 복사'로 변경 -->
+        <div class="tab" onclick="showTab('calculator')">계산기</div>
+        <div class="tab" onclick="showTab('memo')">메모</div>
+        <div class="tab" onclick="showTab('help')">도움말</div>
+        <div class="tab" onclick="showTab('link')">링크 복사</div>
     </div>
 
     <!-- 탭 콘텐츠 -->
     <div class="search-container show" id="search">
         <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
         <div class="gcse-search"></div>
+    </div>
+
+    <div class="search-container" id="calculator">
+        <div class="calculator">
+            <input type="text" id="calc-display" disabled />
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendOperator('+')">+</button>
+            <button onclick="appendOperator('-')">-</button>
+            <button onclick="appendOperator('*')">*</button>
+            <button onclick="appendOperator('/')">/</button>
+        </div>
+    </div>
+
+    <div class="search-container" id="memo">
+        <div class="memo">
+            <textarea id="memo-area" placeholder="메모를 입력하세요..."></textarea>
+            <button onclick="saveMemo()">저장</button>
+        </div>
+    </div>
+
+    <div class="search-container" id="help">
+        <h2>도움말</h2>
+        <p>사이트 사용 방법에 대한 정보를 제공합니다. 각 탭을 클릭하여 기능을 사용해보세요.</p>
     </div>
 
     <div class="search-container" id="link">
@@ -160,7 +243,39 @@
                 alert("링크 복사에 실패했습니다: " + error);
             });
         }
+
+        // 계산기 관련 함수들
+        let currentInput = '';
+        function appendNumber(number) {
+            currentInput += number;
+            document.getElementById('calc-display').value = currentInput;
+        }
+
+        function appendOperator(operator) {
+            currentInput += ' ' + operator + ' ';
+            document.getElementById('calc-display').value = currentInput;
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            document.getElementById('calc-display').value = '';
+        }
+
+        function calculate() {
+            try {
+                currentInput = eval(currentInput).toString();
+                document.getElementById('calc-display').value = currentInput;
+            } catch (e) {
+                document.getElementById('calc-display').value = '오류';
+            }
+        }
+
+        // 메모 저장
+        function saveMemo() {
+            const memoText = document.getElementById('memo-area').value;
+            localStorage.setItem('memo', memoText);
+            alert('메모가 저장되었습니다!');
+        }
     </script>
 </body>
 </html>
-
