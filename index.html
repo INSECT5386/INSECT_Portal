@@ -73,6 +73,7 @@
             width: 100%;
             background-color: white;
             color: #333;
+            margin-bottom: 20px; /* 검색 입력과 버튼 간격 추가 */
         }
 
         .gcse-search input.gsc-input:focus {
@@ -88,7 +89,6 @@
             border-radius: 30px !important;
             padding: 12px 25px !important;
             font-size: 16px;
-            margin-top: 20px;
             transition: background-color 0.3s ease, transform 0.2s;
             cursor: pointer;
         }
@@ -96,40 +96,6 @@
         .gcse-search button.gsc-search-button:hover {
             background-color: #004d40 !important;
             transform: scale(1.05);
-        }
-
-        .dark-mode {
-            background: linear-gradient(135deg, #1c1c1c, #333);
-            color: #f0f0f0;
-        }
-
-        .dark-mode .search-container {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
-        }
-
-        .dark-mode .gcse-search input.gsc-input {
-            border-color: #4caf50;
-            background-color: #333;
-            color: #e0e0e0;
-        }
-
-        .dark-mode-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 12px;
-            background: #00796b;
-            border: none;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .dark-mode-toggle:hover {
-            background: #004d40;
-            transform: rotate(180deg);
         }
 
         @keyframes fadeIn {
@@ -151,6 +117,44 @@
                 width: 90%;
             }
         }
+
+        /* 검색 결과 UI 개선 */
+        .gcse-search .gsc-results .gsc-webResult {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gcse-search .gsc-results .gsc-webResult:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gcse-search .gsc-results .gsc-webResult .gsc-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00796b;
+            text-decoration: none;
+        }
+
+        .gcse-search .gsc-results .gsc-webResult .gsc-title:hover {
+            color: #ffe600;
+        }
+
+        .gcse-search .gsc-results .gsc-webResult .gsc-description {
+            font-size: 14px;
+            color: #555;
+            margin-top: 8px;
+        }
+
+        .gcse-search .gsc-results .gsc-webResult .gsc-url {
+            font-size: 12px;
+            color: #00796b;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -158,28 +162,13 @@
         <h1><a href="/INSECTSEARCH/">INSECT</a></h1>
     </header>
 
-    <button id="dark-mode-toggle" class="dark-mode-toggle">🌙</button>
-    
     <div class="search-container">
         <script async src="https://cse.google.com/cse.js?cx=a2bf2ce5f26fe486a"></script>
         <div class="gcse-search"></div>
     </div>
 
     <script>
-        let isDarkMode = localStorage.getItem('darkMode') === 'true';
-
-        function applyDarkMode() {
-            document.body.classList.toggle('dark-mode', isDarkMode);
-            document.getElementById('dark-mode-toggle').textContent = isDarkMode ? '☀️' : '🌙';
-        }
-
-        document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-            isDarkMode = !isDarkMode;
-            localStorage.setItem('darkMode', isDarkMode);
-            applyDarkMode();
-        });
-
-        applyDarkMode();
+        // 다크 모드 관련 코드 삭제
     </script>
 </body>
 </html>
