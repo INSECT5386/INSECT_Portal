@@ -187,6 +187,8 @@
     </div>
 
     <script>
+        const WIT_API_TOKEN = "7UZQU5CJZTEEOBDDUY73Q62VCZVL7IVT"; // 여기에 발급받은 Wit.ai Client Access Token을 넣으세요.
+
         function showTab(tabId) {
             // 모든 탭 숨기기
             document.querySelectorAll('.search-container').forEach(function(tabContent) {
@@ -228,14 +230,27 @@
             // Clear the input field
             document.getElementById("userInput").value = "";
 
-            // Simulate AI response
-            setTimeout(function() {
+            // Call Wit.ai API for AI response
+            fetch(`https://api.wit.ai/message?v=20250202&q=${encodeURIComponent(userInput)}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${WIT_API_TOKEN}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
                 const aiMessage = document.createElement("p");
-                aiMessage.textContent = "AI: " + "잘 모르겠어요, 좀 더 구체적으로 질문해 주세요!";
+                aiMessage.textContent = "AI: " + data.text;
                 aiMessage.style.backgroundColor = "#feb47b";
                 document.getElementById("chatContainer").appendChild(aiMessage);
                 document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
-            }, 1000);
+            })
+            .catch(error => {
+                const aiMessage = document.createElement("p");
+                aiMessage.textContent = "AI: 요청 실패";
+                aiMessage.style.backgroundColor = "#feb47b";
+                document.getElementById("chatContainer").appendChild(aiMessage);
+            });
         }
     </script>
 </body>
