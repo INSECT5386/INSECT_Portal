@@ -12,58 +12,63 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f0f4f8;
+            background: linear-gradient(135deg, #1d2b64, #f8cdda);
             color: #333;
             margin: 0;
             padding: 0;
             transition: background-color 0.4s ease, color 0.4s ease;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         header {
             text-align: center;
-            padding: 30px 0;
             font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 40px;
         }
         h1 a {
-            color: #00796b;
+            color: #ffffff;
             text-decoration: none;
             font-size: 40px;
-            font-weight: bold;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 2px;
             transition: color 0.3s;
         }
         h1 a:hover {
-            color: #004d40;
+            color: #ffe600;
         }
 
         .search-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 800px;
-            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 600px;
             animation: fadeIn 0.6s ease-in-out;
         }
 
         .gcse-search input.gsc-input {
             border-radius: 30px;
-            padding: 12px 20px;
+            padding: 14px 20px;
             border: 2px solid #00796b;
             font-size: 18px;
             transition: all 0.3s ease;
             width: 100%;
             background-color: white;
-            color: black;
+            color: #333;
         }
 
         .gcse-search input.gsc-input:focus {
-            border-color: #004d40;
-            box-shadow: 0 0 10px rgba(0, 77, 64, 0.3);
+            border-color: #ffe600;
+            box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
             outline: none;
             transform: scale(1.05);
         }
@@ -74,32 +79,33 @@
             border-radius: 30px !important;
             padding: 12px 25px !important;
             font-size: 16px;
-            margin-top: 15px;
+            margin-top: 20px;
             transition: background-color 0.3s ease, transform 0.2s;
+            cursor: pointer;
         }
         .gcse-search button.gsc-search-button:hover {
             background-color: #004d40 !important;
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .dark-mode {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
+            background: linear-gradient(135deg, #1c1c1c, #333);
+            color: #f0f0f0;
         }
         .dark-mode .search-container {
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
         }
         .dark-mode .gcse-search input.gsc-input {
-            background-color: white;
-            color: black;
-            border-color: #004d40;
+            border-color: #4caf50;
+            background-color: #333;
+            color: #e0e0e0;
         }
 
         .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            position: absolute;
+            top: 30px;
+            right: 30px;
             padding: 12px;
             background: #00796b;
             border: none;
@@ -129,7 +135,7 @@
                 font-size: 30px;
             }
             .search-container {
-                width: 95%;
+                width: 90%;
             }
         }
     </style>
