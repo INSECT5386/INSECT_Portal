@@ -19,6 +19,7 @@
             margin: 0;
             padding: 0;
             transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden; /* 화면 가로 넘침 방지 */
         }
 
         header {
@@ -50,10 +51,11 @@
             padding: 50px;
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 900px;
+            width: 100%;
+            max-width: 700px; /* 모바일에서 더 작은 크기 설정 */
             margin: 50px auto;
             animation: fadeIn 0.6s ease-in-out;
+            overflow: hidden; /* 검색창 내부 요소 넘침 방지 */
         }
 
         .gcse-search input.gsc-input {
@@ -106,7 +108,12 @@
                 font-size: 35px;
             }
             .search-container {
-                width: 95%;
+                width: 90%;
+                max-width: 95%; /* 모바일 화면에서 검색창 너비를 더 줄임 */
+                padding: 30px;
+            }
+            .gcse-search input.gsc-input {
+                font-size: 18px; /* 모바일에서 글자 크기 줄임 */
             }
         }
 
@@ -124,3 +131,4 @@
     </div>
 </body>
 </html>
+
