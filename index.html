@@ -47,13 +47,13 @@
             color: #ff9800;
         }
 
-        /* 새로운 검색 UI 스타일 */
+        /* 검색 UI 스타일 */
         .search-container {
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 40px 60px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 50px 70px;
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            max-width: 650px;
             width: 100%;
             text-align: center;
             transition: all 0.3s ease-in-out;
@@ -61,8 +61,8 @@
 
         .gcse-search input.gsc-input {
             border: none;
-            border-radius: 30px;
-            padding: 16px 24px;
+            border-radius: 50px;
+            padding: 18px 28px;
             font-size: 18px;
             width: 100%;
             margin-bottom: 20px;
@@ -79,9 +79,9 @@
         .gcse-search button.gsc-search-button {
             background-color: #ff9800;
             color: #fff;
-            padding: 16px 30px;
-            border-radius: 30px;
-            font-size: 16px;
+            padding: 18px 30px;
+            border-radius: 50px;
+            font-size: 18px;
             width: 100%;
             cursor: pointer;
             border: none;
@@ -97,7 +97,7 @@
         .gcse-search .gsc-results .gsc-webResult {
             background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
             padding: 20px;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -105,7 +105,7 @@
 
         .gcse-search .gsc-results .gsc-webResult:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
         }
 
         .gcse-search .gsc-results .gsc-webResult .gsc-title {
@@ -133,7 +133,7 @@
         /* 반응형 디자인 */
         @media (max-width: 768px) {
             .search-container {
-                padding: 30px 40px;
+                padding: 30px 50px;
                 width: 90%;
             }
 
@@ -143,7 +143,7 @@
             }
 
             .gcse-search button.gsc-search-button {
-                font-size: 14px;
+                font-size: 16px;
                 padding: 14px 20px;
             }
         }
@@ -164,8 +164,8 @@
             }
 
             .gcse-search button.gsc-search-button {
-                font-size: 12px;
-                padding: 10px 16px;
+                font-size: 14px;
+                padding: 12px 16px;
             }
         }
     </style>
@@ -179,9 +179,6 @@
         <script async src="https://cse.google.com/cse.js?cx=455b5179eed61450f"></script>
         <div class="gcse-search"></div>
     </div>
-
-    <script>
-        // 다크 모드 관련 코드 삭제
-    </script>
 </body>
 </html>
+
