@@ -89,47 +89,26 @@
             opacity: 1;
         }
 
-        /* AI 채팅 스타일 */
-        .chat-container {
-            background: rgba(255, 255, 255, 0.9);
+        /* 뉴스 콘텐츠 스타일 */
+        .news-container {
+            padding: 20px;
+        }
+
+        .news-container h2 {
+            font-size: 24px;
+        }
+
+        .news-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .news-container li {
+            margin: 10px 0;
+            background-color: #fff;
             padding: 15px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-            height: 400px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column-reverse;
-        }
-
-        .chat-box {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 10px;
-        }
-
-        .chat-box p {
-            margin: 0;
-            padding: 10px;
-            border-radius: 10px;
-            background-color: #feb47b;
-            color: white;
-            font-size: 16px;
-        }
-
-        .chat-input {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 20px;
-            font-size: 16px;
-            margin-top: 10px;
-            box-sizing: border-box;
-        }
-
-        .chat-input:focus {
-            outline: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         /* 버튼 스타일 */
@@ -161,7 +140,7 @@
     <div class="tabs">
         <div class="tab active" onclick="showTab('search')">검색</div>
         <div class="tab" onclick="showTab('link')">링크 복사</div> <!-- '소개' -> '링크 복사'로 변경 -->
-        <div class="tab" onclick="showTab('ai')">AI</div>
+        <div class="tab" onclick="showTab('news')">뉴스</div> <!-- 'AI' 탭을 '뉴스'로 변경 -->
     </div>
 
     <!-- 탭 콘텐츠 -->
@@ -176,17 +155,56 @@
         <button onclick="copyLink()">링크 복사</button>
     </div>
 
-    <!-- AI 채팅 콘텐츠 -->
-    <div class="search-container" id="ai">
-        <h2>AI 챗봇과 대화하기</h2>
-        <div class="chat-container" id="chatContainer">
-            <!-- Chat messages will appear here -->
+    <!-- 뉴스 콘텐츠 -->
+    <div class="search-container" id="news">
+        <div class="news-container">
+            <h2>최신 뉴스</h2>
+            <ul id="newsList">
+                <!-- 뉴스 항목들이 여기에 동적으로 추가됩니다. -->
+            </ul>
         </div>
-        <input type="text" class="chat-input" id="userInput" placeholder="메시지를 입력하세요..." onkeydown="if(event.key === 'Enter'){ sendMessage();}">
-        <button class="send-button" onclick="sendMessage()">전송</button>
     </div>
 
     <script>
+        const newsApiKey = '88c60875b0344c30a37a399d64c8ad5d'; // 여기 YOUR_NEWSAPI_KEY를 실제 API 키로 바꿔주세요.
+
+        // 최신 뉴스 가져오기
+        function fetchNews() {
+            const url = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${newsApiKey}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const articles = data.articles;
+                    const newsList = document.getElementById('newsList');
+
+                    // 기존 뉴스 목록 초기화
+                    newsList.innerHTML = '';
+
+                    // 뉴스 항목 추가
+                    articles.forEach(article => {
+                        const listItem = document.createElement('li');
+                        const headline = document.createElement('h3');
+                        const description = document.createElement('p');
+
+                        headline.textContent = article.title;
+                        description.textContent = article.description;
+
+                        listItem.appendChild(headline);
+                        listItem.appendChild(description);
+                        newsList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('뉴스를 가져오는 데 실패했습니다:', error);
+                });
+        }
+
+        // 페이지 로드 시 뉴스 불러오기
+        window.onload = function() {
+            fetchNews();
+        };
+
         function showTab(tabId) {
             // 모든 탭 숨기기
             document.querySelectorAll('.search-container').forEach(function(tabContent) {
@@ -214,30 +232,6 @@
                 alert("링크 복사에 실패했습니다: " + error);
             });
         }
-
-        function sendMessage() {
-            const userInput = document.getElementById("userInput").value;
-            if (userInput.trim() === "") return;
-
-            // Show the user's message
-            const userMessage = document.createElement("p");
-            userMessage.textContent = userInput;
-            userMessage.style.backgroundColor = "#ff7e5f";
-            document.getElementById("chatContainer").appendChild(userMessage);
-
-            // Clear the input field
-            document.getElementById("userInput").value = "";
-
-            // Simulate AI response
-            setTimeout(function() {
-                const aiMessage = document.createElement("p");
-                aiMessage.textContent = "AI: " + "잘 모르겠어요, 좀 더 구체적으로 질문해 주세요!";
-                aiMessage.style.backgroundColor = "#feb47b";
-                document.getElementById("chatContainer").appendChild(aiMessage);
-                document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
-            }, 1000);
-        }
     </script>
 </body>
 </html>
-
