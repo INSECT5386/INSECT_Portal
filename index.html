@@ -9,10 +9,9 @@
     <title>INSECT 검색 엔진</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
-        /* 전체 페이지 스타일 */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
             color: #333;
             margin: 0;
             padding: 0;
@@ -25,81 +24,50 @@
         h1 a {
             color: #00796b;
             text-decoration: none;
-            font-size: 40px;
+            font-size: 42px;
             font-weight: bold;
             text-transform: uppercase;
         }
-
-        /* 검색창 스타일 */
         .search-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             background: #fff;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             width: 80%;
             max-width: 800px;
             margin: 30px auto;
             animation: fadeIn 0.6s ease-in-out;
         }
-
-        .gcse-search {
+        .search-box {
+            display: flex;
             width: 100%;
-        }
-
-        .gcse-search input.gsc-input {
             border-radius: 30px;
-            padding: 12px 20px;
+            overflow: hidden;
             border: 2px solid #00796b;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            width: 100%;
+            background: white;
         }
-
-        .gcse-search input.gsc-input:focus {
-            border-color: #004d40;
-            box-shadow: 0 0 10px rgba(0, 77, 64, 0.3);
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
             outline: none;
         }
-
-        .gcse-search button.gsc-search-button {
-            background-color: #00796b !important;
-            color: white !important;
-            border-radius: 30px !important;
-            padding: 12px 25px !important;
-            font-size: 16px;
-            margin-top: 15px;
-            transition: background-color 0.3s ease;
-        }
-
-        .gcse-search button.gsc-search-button:hover {
-            background-color: #004d40 !important;
-        }
-
-        /* 다크 모드 */
-        .dark-mode {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-        }
-
-        .dark-mode .search-container {
-            background: #333;
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
-        }
-
-        .dark-mode .gcse-search input.gsc-input {
-            background-color: #444;
+        .search-box button {
+            background-color: #00796b;
             color: white;
-            border-color: #004d40;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
         }
-
-        .dark-mode .gcse-search button.gsc-search-button {
-            background-color: #004d40 !important;
+        .search-box button:hover {
+            background-color: #004d40;
         }
-
-        /* 다크모드 전환 버튼 */
         #dark-mode-toggle {
             position: fixed;
             top: 20px;
@@ -112,12 +80,29 @@
             cursor: pointer;
             transition: transform 0.3s;
         }
-
         #dark-mode-toggle:hover {
             transform: rotate(180deg);
         }
-
-        /* 애니메이션 */
+        .recent-searches {
+            margin-top: 20px;
+            text-align: left;
+            width: 100%;
+        }
+        .recent-searches ul {
+            list-style: none;
+            padding: 0;
+        }
+        .recent-searches li {
+            background: #eee;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .recent-searches li:hover {
+            background: #ddd;
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -128,33 +113,25 @@
                 transform: translateY(0);
             }
         }
-
-        @media (max-width: 768px) {
-            h1 a {
-                font-size: 30px;
-            }
-
-            .search-container {
-                width: 95%;
-            }
-        }
     </style>
 </head>
 <body>
     <header>
         <h1><a href="/INSECTSEARCH/">INSECT</a></h1>
     </header>
-
     <button id="dark-mode-toggle">🌙</button>
-    
     <div class="search-container">
-        <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
-        <div class="gcse-search"></div>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="검색어를 입력하세요...">
+            <button onclick="search()">🔍</button>
+        </div>
+        <div class="recent-searches" id="recent-searches">
+            <h3>최근 검색어</h3>
+            <ul id="recent-list"></ul>
+        </div>
     </div>
-
     <script>
         let isDarkMode = localStorage.getItem('darkMode') === 'true';
-
         function applyDarkMode() {
             if (isDarkMode) {
                 document.body.classList.add('dark-mode');
@@ -164,14 +141,43 @@
                 document.getElementById('dark-mode-toggle').textContent = '🌙';
             }
         }
-
         document.getElementById('dark-mode-toggle').addEventListener('click', function() {
             isDarkMode = !isDarkMode;
             localStorage.setItem('darkMode', isDarkMode);
             applyDarkMode();
         });
-
         applyDarkMode();
+        function search() {
+            let query = document.getElementById('search-input').value;
+            if (query) {
+                saveSearch(query);
+                window.location.href = `https://www.google.com/search?q=${query}`;
+            }
+        }
+        function saveSearch(query) {
+            let searches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+            if (!searches.includes(query)) {
+                searches.unshift(query);
+                if (searches.length > 5) searches.pop();
+                localStorage.setItem('recentSearches', JSON.stringify(searches));
+                displayRecentSearches();
+            }
+        }
+        function displayRecentSearches() {
+            let searches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+            let list = document.getElementById('recent-list');
+            list.innerHTML = '';
+            searches.forEach(search => {
+                let li = document.createElement('li');
+                li.textContent = search;
+                li.onclick = () => {
+                    document.getElementById('search-input').value = search;
+                    search();
+                };
+                list.appendChild(li);
+            });
+        }
+        displayRecentSearches();
     </script>
 </body>
 </html>
