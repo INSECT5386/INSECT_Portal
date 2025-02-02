@@ -134,6 +134,11 @@
                 padding: 8vh 5vw; /* 상단 패딩 늘려서 모바일에서 공간 확보 */
                 width: 90vw;
                 max-width: 90vw;
+                transition: transform 0.3s ease; /* 터치로 확대된 후 원래 크기로 돌아오는 애니메이션 */
+            }
+
+            .search-container:active {
+                transform: scale(0.95); /* 터치 시 검색창 크기 줄어드는 효과 */
             }
         }
 
