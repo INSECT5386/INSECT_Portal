@@ -216,6 +216,14 @@
     </div>
 
     <script>
+        // 페이지 로드 시 로컬 스토리지에서 메모를 불러오기
+        window.onload = function() {
+            const savedMemo = localStorage.getItem('memo');
+            if (savedMemo) {
+                document.getElementById('memo-area').value = savedMemo;
+            }
+        }
+
         function showTab(tabId) {
             // 모든 탭 숨기기
             document.querySelectorAll('.search-container').forEach(function(tabContent) {
