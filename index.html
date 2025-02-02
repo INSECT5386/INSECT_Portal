@@ -120,6 +120,25 @@
                 padding: 10vw 5vw;  /* 패딩을 좀 더 여유있게 설정 */
             }
         }
+
+        /* 데스크탑 대응 */
+        @media (min-width: 769px) {
+            header {
+                font-size: 5vw; /* 데스크탑에서의 폰트 크기 조정 */
+            }
+
+            .gcse-search input.gsc-input {
+                font-size: 3vw; /* 데스크탑에 맞게 폰트 크기 조정 */
+            }
+
+            .gcse-search button.gsc-search-button {
+                font-size: 3vw; /* 데스크탑에 맞게 버튼 크기 조정 */
+            }
+
+            .search-container {
+                padding: 7vh 5vw; /* 여유있는 패딩 */
+            }
+        }
     </style>
 </head>
 <body>
