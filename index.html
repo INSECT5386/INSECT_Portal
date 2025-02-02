@@ -163,10 +163,7 @@
     <!-- 탭들 -->
     <div class="tabs">
         <div class="tab active" onclick="showTab('search')">검색</div>
-        <div class="tab" onclick="showTab('calculator')">계산기</div>
-        <div class="tab" onclick="showTab('memo')">메모</div>
-        <div class="tab" onclick="showTab('help')">도움말</div>
-        <div class="tab" onclick="showTab('link')">링크 복사</div>
+        <div class="tab" onclick="showTab('portal')">포털</div>
     </div>
 
     <!-- 탭 콘텐츠 -->
@@ -175,44 +172,53 @@
         <div class="gcse-search"></div>
     </div>
 
-    <div class="search-container" id="calculator">
-        <div class="calculator">
-            <input type="text" id="calc-display" disabled />
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
-            <button onclick="appendNumber('7')">7</button>
-            <button onclick="appendNumber('8')">8</button>
-            <button onclick="appendNumber('9')">9</button>
-            <button onclick="appendNumber('0')">0</button>
-            <button onclick="clearDisplay()">C</button>
-            <button onclick="calculate()">=</button>
-            <button onclick="appendOperator('+')">+</button>
-            <button onclick="appendOperator('-')">-</button>
-            <button onclick="appendOperator('*')">*</button>
-            <button onclick="appendOperator('/')">/</button>
+    <div class="search-container" id="portal">
+        <div class="tabs">
+            <div class="tab" onclick="showPortalTab('calculator')">계산기</div>
+            <div class="tab" onclick="showPortalTab('memo')">메모</div>
+            <div class="tab" onclick="showPortalTab('help')">도움말</div>
+            <div class="tab" onclick="showPortalTab('link')">링크 복사</div>
         </div>
-    </div>
 
-    <div class="search-container" id="memo">
-        <div class="memo">
-            <textarea id="memo-area" placeholder="메모를 입력하세요..."></textarea>
-            <button onclick="saveMemo()">저장</button>
+        <div class="search-container" id="calculator">
+            <div class="calculator">
+                <input type="text" id="calc-display" disabled />
+                <button onclick="appendNumber('1')">1</button>
+                <button onclick="appendNumber('2')">2</button>
+                <button onclick="appendNumber('3')">3</button>
+                <button onclick="appendNumber('4')">4</button>
+                <button onclick="appendNumber('5')">5</button>
+                <button onclick="appendNumber('6')">6</button>
+                <button onclick="appendNumber('7')">7</button>
+                <button onclick="appendNumber('8')">8</button>
+                <button onclick="appendNumber('9')">9</button>
+                <button onclick="appendNumber('0')">0</button>
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="calculate()">=</button>
+                <button onclick="appendOperator('+')">+</button>
+                <button onclick="appendOperator('-')">-</button>
+                <button onclick="appendOperator('*')">*</button>
+                <button onclick="appendOperator('/')">/</button>
+            </div>
         </div>
-    </div>
 
-    <div class="search-container" id="help">
-        <h2>도움말</h2>
-        <p>사이트 사용 방법에 대한 정보를 제공합니다. 각 탭을 클릭하여 기능을 사용해보세요.</p>
-    </div>
+        <div class="search-container" id="memo">
+            <div class="memo">
+                <textarea id="memo-area" placeholder="메모를 입력하세요..."></textarea>
+                <button onclick="saveMemo()">저장</button>
+            </div>
+        </div>
 
-    <div class="search-container" id="link">
-        <h2>링크 복사</h2>
-        <p>INSECT 검색 엔진 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
-        <button onclick="copyLink()">링크 복사</button>
+        <div class="search-container" id="help">
+            <h2>도움말</h2>
+            <p>사이트 사용 방법에 대한 정보를 제공합니다. 각 탭을 클릭하여 기능을 사용해보세요.</p>
+        </div>
+
+        <div class="search-container" id="link">
+            <h2>링크 복사</h2>
+            <p>INSECT 검색 엔진 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
+            <button onclick="copyLink()">링크 복사</button>
+        </div>
     </div>
 
     <script>
@@ -240,6 +246,25 @@
 
             // 선택한 탭 활성화
             const activeTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
+            activeTab.classList.add('active');
+        }
+
+        function showPortalTab(tabId) {
+            // 포털 탭 내부 탭 숨기기
+            document.querySelectorAll('.search-container').forEach(function(tabContent) {
+                tabContent.classList.remove('show');
+            });
+
+            // 포털 탭 비활성화
+            document.querySelectorAll('#portal .tab').forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+
+            // 선택한 포털 탭 내용 보여주기
+            document.getElementById(tabId).classList.add('show');
+
+            // 선택한 포털 탭 활성화
+            const activeTab = document.querySelector(`#portal .tab[onclick="showPortalTab('${tabId}')"]`);
             activeTab.classList.add('active');
         }
 
