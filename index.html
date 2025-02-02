@@ -23,7 +23,7 @@
 
         header {
             text-align: center;
-            padding: 10vh 0;
+            padding: 8vh 0; /* 상단 여백 줄여서 검색창을 위로 이동 */
             font-size: 10vw;
             color: #ffffff;  /* 텍스트 색상 변경 */
             text-transform: uppercase;
@@ -55,7 +55,7 @@
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.8); /* 투명한 밝은 배경 */
-            padding: 7vh 5vw;
+            padding: 5vh 5vw; /* 상단 패딩 줄여서 위로 이동 */
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* 밝은 그림자 */
             width: 90vw;
@@ -117,19 +117,23 @@
         @media (max-width: 768px) {
             header {
                 font-size: 8vw;
+                padding-top: 5vh; /* 모바일에서 헤더 여백을 줄여서 화면에 더 많은 공간 확보 */
             }
 
             .gcse-search input.gsc-input {
-                font-size: 5vw;
+                font-size: 6vw; /* 입력창 글씨 크기 증가 */
+                padding: 15px; /* 입력창 패딩 증가 */
             }
 
             .gcse-search button.gsc-search-button {
-                font-size: 5vw;
+                font-size: 6vw; /* 버튼 글씨 크기 증가 */
+                padding: 25px 50px; /* 버튼 크기 조정 */
             }
 
             .search-container {
-                padding: 10vw 5vw;
+                padding: 8vh 5vw; /* 상단 패딩 늘려서 모바일에서 공간 확보 */
                 width: 90vw;
+                max-width: 90vw;
             }
         }
 
