@@ -23,11 +23,11 @@
 
         header {
             text-align: center;
-            padding: 2vh 0; /* 상단 여백을 더 줄여서 검색창을 더 위로 이동 */
-            font-size: 8vw;
+            padding: 3vh 0; /* 상단 여백을 더 줄여서 검색창을 더 위로 이동 */
+            font-size: 6vw;
             color: #ffffff;  /* 텍스트 색상 변경 */
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             font-weight: 900;
             transition: transform 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
         }
@@ -35,13 +35,13 @@
         header:hover {
             transform: rotate(-3deg); /* 미세한 회전 효과 */
             color: #004d40;  /* 색상 변환 */
-            letter-spacing: 10px; /* 문자 간격 증가 */
+            letter-spacing: 8px; /* 문자 간격 증가 */
         }
 
         h1 a {
             color: inherit;
             text-decoration: none;
-            font-size: 8vw;
+            font-size: 6vw;
             transition: color 0.3s ease, transform 0.3s ease;
         }
 
@@ -54,18 +54,19 @@
         .tabs {
             display: flex;
             justify-content: center;
-            margin-top: 5px; /* 탭과 헤더 사이 간격을 더 줄임 */
+            margin-top: 2vh;
             transition: all 0.3s ease-in-out;
         }
 
         .tab {
-            padding: 15px 25px;
+            padding: 12px 20px;
             margin: 0 5px;
             font-size: 18px;
             cursor: pointer;
             background-color: #ff7e5f;
             color: white;
-            border-radius: 25px;
+            border-radius: 50px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
 
@@ -112,16 +113,18 @@
             grid-column: span 4;
             font-size: 24px;
             text-align: right;
-            padding: 10px;
+            padding: 15px;
             margin-bottom: 10px;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 2px solid #ff7e5f;
+            background: #fff;
             transition: border 0.3s ease, box-shadow 0.3s ease;
         }
 
         .calculator input:focus {
             border: 2px solid #feb47b;
             box-shadow: 0 0 10px rgba(255, 126, 95, 0.6);
+            outline: none;
         }
 
         .calculator button {
@@ -130,7 +133,7 @@
             background-color: #ff7e5f;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -152,22 +155,24 @@
             height: 150px;
             padding: 10px;
             font-size: 16px;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid #ccc;
+            background: #fff;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .memo textarea:focus {
             border-color: #feb47b;
             box-shadow: 0 0 10px rgba(255, 126, 95, 0.6);
+            outline: none;
         }
 
         .memo button {
             margin-top: 10px;
             background-color: #ff7e5f;
             color: white;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px 20px;
+            border-radius: 12px;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
