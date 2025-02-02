@@ -29,23 +29,25 @@
             text-transform: uppercase;
             letter-spacing: 5px;
             font-weight: 900;
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: transform 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
         }
 
         header:hover {
             transform: rotate(-3deg); /* 미세한 회전 효과 */
             color: #004d40;  /* 색상 변환 */
+            letter-spacing: 10px; /* 문자 간격 증가 */
         }
 
         h1 a {
             color: inherit;
             text-decoration: none;
             font-size: 8vw;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         h1 a:hover {
             color: #004d40;
+            transform: scale(1.05); /* 약간 확대 */
         }
 
         /* 탭 스타일 */
@@ -53,6 +55,7 @@
             display: flex;
             justify-content: center;
             margin-top: 5px; /* 탭과 헤더 사이 간격을 더 줄임 */
+            transition: all 0.3s ease-in-out;
         }
 
         .tab {
@@ -63,12 +66,13 @@
             background-color: #ff7e5f;
             color: white;
             border-radius: 25px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
 
         .tab:hover {
             background-color: #feb47b;
-            transform: scale(1.1);
+            transform: scale(1.05); /* 탭 확대 효과 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 */
         }
 
         .tab.active {
@@ -80,13 +84,19 @@
         .search-container {
             display: none;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out; /* 부드러운 전환 효과 */
+            transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
             padding: 20px;
         }
 
         .search-container.show {
             display: block;
             opacity: 1;
+            transform: translateY(0);
+        }
+
+        .search-container.hide {
+            opacity: 0;
+            transform: translateY(-10px);
         }
 
         /* 계산기 스타일 */
@@ -95,6 +105,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
+            animation: fadeIn 0.5s ease-in-out; /* 애니메이션 추가 */
         }
 
         .calculator input {
@@ -103,6 +114,14 @@
             text-align: right;
             padding: 10px;
             margin-bottom: 10px;
+            border-radius: 8px;
+            border: 2px solid #ff7e5f;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .calculator input:focus {
+            border: 2px solid #feb47b;
+            box-shadow: 0 0 10px rgba(255, 126, 95, 0.6);
         }
 
         .calculator button {
@@ -113,16 +132,19 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .calculator button:hover {
             background-color: #feb47b;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         /* 메모 기능 스타일 */
         .memo {
             margin-top: 10px;
+            animation: fadeIn 0.5s ease-in-out; /* 애니메이션 추가 */
         }
 
         .memo textarea {
@@ -132,6 +154,12 @@
             font-size: 16px;
             border-radius: 10px;
             border: 1px solid #ccc;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .memo textarea:focus {
+            border-color: #feb47b;
+            box-shadow: 0 0 10px rgba(255, 126, 95, 0.6);
         }
 
         .memo button {
@@ -142,10 +170,12 @@
             border-radius: 10px;
             font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .memo button:hover {
             background-color: #feb47b;
+            transform: scale(1.1);
         }
 
         /* 도움말 스타일 */
@@ -153,6 +183,17 @@
             margin-top: 10px;
         }
 
+        /* 추가 애니메이션 효과 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -234,6 +275,7 @@
             // 모든 탭 숨기기
             document.querySelectorAll('.search-container').forEach(function(tabContent) {
                 tabContent.classList.remove('show');
+                tabContent.classList.add('hide');
             });
 
             // 모든 탭 비활성화
@@ -243,6 +285,7 @@
 
             // 선택한 탭 내용 보여주기
             document.getElementById(tabId).classList.add('show');
+            document.getElementById(tabId).classList.remove('hide');
 
             // 선택한 탭 활성화
             const activeTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
@@ -253,6 +296,7 @@
             // 포털 탭 내부 탭 숨기기
             document.querySelectorAll('#portal .search-container').forEach(function(tabContent) {
                 tabContent.classList.remove('show');
+                tabContent.classList.add('hide');
             });
 
             // 포털 탭 비활성화
@@ -262,6 +306,7 @@
 
             // 선택한 포털 탭 내용 보여주기
             document.getElementById(tabId).classList.add('show');
+            document.getElementById(tabId).classList.remove('hide');
 
             // 선택한 포털 탭 활성화
             const activeTab = document.querySelector(`#portal .tab[onclick="showPortalTab('${tabId}')"]`);
