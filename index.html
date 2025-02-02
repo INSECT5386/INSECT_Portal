@@ -1,1 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="INSECT 검색 엔진">
+    <meta property="og:title" content="INSECT">
+    <meta property="og:description" content="INSECT 검색 엔진">
+    <title>INSECT 검색 엔진</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle, #ff7e5f, #feb47b); /* 밝은 그라데이션 배경 */
+            color: #333;  /* 텍스트를 더 어두운 색으로 변경 */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        header {
+            text-align: center;
+            padding: 2vh 0; /* 상단 여백을 더 줄여서 검색창을 더 위로 이동 */
+            font-size: 8vw;
+            color: #ffffff;  /* 텍스트 색상 변경 */
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 900;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        header:hover {
+            transform: rotate(-3deg); /* 미세한 회전 효과 */
+            color: #004d40;  /* 색상 변환 */
+        }
+
+        h1 a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 8vw;
+            transition: color 0.3s ease;
+        }
+
+        h1 a:hover {
+            color: #004d40;
+        }
+
+        /* 탭 스타일 */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px; /* 탭과 헤더 사이 간격을 더 줄임 */
+        }
+
+        .tab {
+            padding: 15px 25px;
+            margin: 0 5px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff7e5f;
+            color: white;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .tab:hover {
+            background-color: #feb47b;
+            transform: scale(1.1);
+        }
+
+        .tab.active {
+            background-color: #feb47b;
+            font-weight: bold; /* 강조 효과 */
+        }
+
+        /* 탭 콘텐츠 스타일 */
+        .search-container {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out; /* 부드러운 전환 효과 */
+            padding: 20px;
+        }
+
+        .search-container.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* AI 채팅 스타일 */
+        .chat-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .chat-box p {
+            margin: 0;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #feb47b;
+            color: white;
+            font-size: 16px;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        .chat-input:focus {
+            outline: none;
+        }
+
+        /* 버튼 스타일 */
+        .send-button {
+            background-color: #ff7e5f;
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .send-button:hover {
+            background-color: #feb47b;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/INSECTSEARCH/">INSECT</a></h1>
+    </header>
+
+    <!-- 탭들 -->
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('search')">검색</div>
+        <div class="tab" onclick="showTab('link')">링크 복사</div> <!-- '소개' -> '링크 복사'로 변경 -->
+        <div class="tab" onclick="showTab('ai')">AI</div>
+    </div>
+
+    <!-- 탭 콘텐츠 -->
+    <div class="search-container show" id="search">
+        <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
+        <div class="gcse-search"></div>
+    </div>
+
+    <div class="search-container" id="link">
+        <h2>링크 복사</h2>
+        <p>INSECT 검색 엔진 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
+        <button onclick="copyLink()">링크 복사</button>
+    </div>
+
+    <!-- AI 채팅 콘텐츠 -->
+    <div class="search-container" id="ai">
+        <h2>AI 챗봇과 대화하기</h2>
+        <div class="chat-container" id="chatContainer">
+            <!-- Chat messages will appear here -->
+        </div>
+        <input type="text" class="chat-input" id="userInput" placeholder="메시지를 입력하세요..." onkeydown="if(event.key === 'Enter'){ sendMessage();}">
+        <button class="send-button" onclick="sendMessage()">전송</button>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // 모든 탭 숨기기
+            document.querySelectorAll('.search-container').forEach(function(tabContent) {
+                tabContent.classList.remove('show');
+            });
+
+            // 모든 탭 비활성화
+            document.querySelectorAll('.tab').forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+
+            // 선택한 탭 내용 보여주기
+            document.getElementById(tabId).classList.add('show');
+
+            // 선택한 탭 활성화
+            const activeTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
+            activeTab.classList.add('active');
+        }
+
+        function copyLink() {
+            const link = window.location.href;
+            navigator.clipboard.writeText(link).then(function() {
+                alert("링크가 복사되었습니다!");
+            }).catch(function(error) {
+                alert("링크 복사에 실패했습니다: " + error);
+            });
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById("userInput").value;
+            if (userInput.trim() === "") return;
+
+            // Show the user's message
+            const userMessage = document.createElement("p");
+            userMessage.textContent = userInput;
+            userMessage.style.backgroundColor = "#ff7e5f";
+            document.getElementById("chatContainer").appendChild(userMessage);
+
+            // Clear the input field
+            document.getElementById("userInput").value = "";
+
+            // Simulate AI response
+            setTimeout(function() {
+                const aiMessage = document.createElement("p");
+                aiMessage.textContent = "AI: " + "잘 모르겠어요, 좀 더 구체적으로 질문해 주세요!";
+                aiMessage.style.backgroundColor = "#feb47b";
+                document.getElementById("chatContainer").appendChild(aiMessage);
+                document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
 
