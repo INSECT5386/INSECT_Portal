@@ -89,28 +89,6 @@
             opacity: 1;
         }
 
-        /* 뉴스 콘텐츠 스타일 */
-        .news-container {
-            padding: 20px;
-        }
-
-        .news-container h2 {
-            font-size: 24px;
-        }
-
-        .news-container ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .news-container li {
-            margin: 10px 0;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
         /* 버튼 스타일 */
         .send-button {
             background-color: #ff7e5f;
@@ -140,7 +118,6 @@
     <div class="tabs">
         <div class="tab active" onclick="showTab('search')">검색</div>
         <div class="tab" onclick="showTab('link')">링크 복사</div> <!-- '소개' -> '링크 복사'로 변경 -->
-        <div class="tab" onclick="showTab('news')">뉴스</div> <!-- 'AI' 탭을 '뉴스'로 변경 -->
     </div>
 
     <!-- 탭 콘텐츠 -->
@@ -155,56 +132,7 @@
         <button onclick="copyLink()">링크 복사</button>
     </div>
 
-    <!-- 뉴스 콘텐츠 -->
-    <div class="search-container" id="news">
-        <div class="news-container">
-            <h2>최신 뉴스</h2>
-            <ul id="newsList">
-                <!-- 뉴스 항목들이 여기에 동적으로 추가됩니다. -->
-            </ul>
-        </div>
-    </div>
-
     <script>
-        const newsApiKey = '88c60875b0344c30a37a399d64c8ad5d'; // 여기 YOUR_NEWSAPI_KEY를 실제 API 키로 바꿔주세요.
-
-        // 최신 뉴스 가져오기
-        function fetchNews() {
-            const url = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${newsApiKey}`;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    const articles = data.articles;
-                    const newsList = document.getElementById('newsList');
-
-                    // 기존 뉴스 목록 초기화
-                    newsList.innerHTML = '';
-
-                    // 뉴스 항목 추가
-                    articles.forEach(article => {
-                        const listItem = document.createElement('li');
-                        const headline = document.createElement('h3');
-                        const description = document.createElement('p');
-
-                        headline.textContent = article.title;
-                        description.textContent = article.description;
-
-                        listItem.appendChild(headline);
-                        listItem.appendChild(description);
-                        newsList.appendChild(listItem);
-                    });
-                })
-                .catch(error => {
-                    console.error('뉴스를 가져오는 데 실패했습니다:', error);
-                });
-        }
-
-        // 페이지 로드 시 뉴스 불러오기
-        window.onload = function() {
-            fetchNews();
-        };
-
         function showTab(tabId) {
             // 모든 탭 숨기기
             document.querySelectorAll('.search-container').forEach(function(tabContent) {
@@ -235,3 +163,4 @@
     </script>
 </body>
 </html>
+
