@@ -95,6 +95,38 @@
             background: #666;
             color: #80b3ff;
         }
+        #chatbox {
+            border: 1px solid #444;
+            padding: 10px;
+            border-radius: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            width: 100%;
+        }
+        #chatlogs {
+            margin-bottom: 10px;
+        }
+        #userInput {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #222;
+            color: #f0f0f0;
+        }
+        #chatbot button {
+            width: 15%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #444;
+            color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+        }
+        #chatbot button:hover {
+            background-color: #666;
+            color: #80b3ff;
+        }
         @media (max-width: 600px) {
             header {
                 font-size: 7vw;
@@ -105,6 +137,9 @@
             }
             .search-container {
                 width: 95%;
+            }
+            #chatbot button {
+                width: 30%;
             }
         }
     </style>
@@ -126,8 +161,14 @@
     </div>
 
     <div class="search-container" id="ai">
-        <h2>AI 기능</h2>
-        <p>여기서 AI 관련 작업을 할 수 있습니다.</p>
+        <h2>AI 챗봇</h2>
+        <div id="chatbot">
+            <div id="chatbox">
+                <div id="chatlogs"></div>
+                <input type="text" id="userInput" placeholder="메시지를 입력하세요..." />
+                <button onclick="sendMessage()">전송</button>
+            </div>
+        </div>
     </div>
 
     <div class="search-container" id="link">
@@ -150,6 +191,7 @@
                 });
             });
         });
+        
         document.getElementById("copyBtn").addEventListener("click", () => {
             const link = window.location.href;
             if (navigator.clipboard) {
@@ -163,6 +205,7 @@
                 fallbackCopyText(link);
             }
         });
+        
         function fallbackCopyText(text) {
             const tempInput = document.createElement("textarea");
             document.body.appendChild(tempInput);
@@ -171,6 +214,43 @@
             document.execCommand("copy");
             document.body.removeChild(tempInput);
             alert("링크가 복사되었습니다!");
+        }
+
+        const chatLogs = document.getElementById("chatlogs");
+
+        function sendMessage() {
+            const userInput = document.getElementById("userInput");
+            const message = userInput.value.trim();
+
+            if (message === "") return;
+
+            // 사용자가 입력한 메시지 표시
+            appendMessage("사용자", message);
+            userInput.value = "";
+
+            // 챗봇 응답 (간단한 스크립트 기반 응답)
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                appendMessage("챗봇", response);
+            }, 500);
+        }
+
+        function appendMessage(sender, message) {
+            const messageDiv = document.createElement("div");
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatLogs.appendChild(messageDiv);
+            chatLogs.scrollTop = chatLogs.scrollHeight;
+        }
+
+        function getBotResponse(input) {
+            const responses = {
+                "안녕하세요": "안녕하세요! 무엇을 도와드릴까요?",
+                "이름이 뭐야?": "저는 INSECT Portal 챗봇입니다.",
+                "어떻게 작동해?": "간단한 키워드 기반 챗봇입니다.",
+                "잘가": "다음에 또 만나요!"
+            };
+
+            return responses[input] || "죄송해요, 이해하지 못했어요.";
         }
     </script>
 </body>
