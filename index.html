@@ -162,26 +162,29 @@
 
     <div class="search-container" id="ai">
         <h2>INSECTIUM AI</h2>
-        <script src="https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js"></script>
+        <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
         <script>
           window.addEventListener("DOMContentLoaded", function() {
             window.AgentInitializer.init({
-              rootId: "JotformAgent-0194cbd6fbb97b43aa96ce8e9dcf44fefa2d",
-              formID: "0194cbd6fbb97b43aa96ce8e9dcf44fefa2d",
+              agentRenderURL: "https://agent.jotform.com/0194cbdfbabc7c76bb0f52a7e87999c89679",
+              rootId: "JotformAgent-0194cbdfbabc7c76bb0f52a7e87999c89679",
+              formID: "0194cbdfbabc7c76bb0f52a7e87999c89679",
               queryParams: ["skipWelcome=1", "maximizable=1"],
-              domain: "https:\/\/www.jform.co.kr",
+              domain: "https://www.jform.co.kr",
               isInitialOpen: false,
               isDraggable: false,
-              background: "linear-gradient(180deg, #C8CEED 0%, #C8CEED 100%)",
-              buttonBackgroundColor: "#0a1551",
-              buttonIconColor: "#fff",
+              background: "linear-gradient(180deg, #424757 0%, #424757 100%)",
+              buttonBackgroundColor: "#11111B",
+              buttonIconColor: "#FFF",
               variant: false,
               customizations: {
-                greeting: "Yes",
-                greetingMessage: "안녕?",
-                pulse: "Yes",
-                position: "right"
-              }
+                "greeting": "Yes",
+                "greetingMessage": "Hi! How can I assist you?",
+                "openByDefault": "No",
+                "pulse": "Yes",
+                "position": "right"
+              },
+              isVoice: undefined
             });
           });
         </script>
