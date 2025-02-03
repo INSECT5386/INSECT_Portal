@@ -45,20 +45,23 @@
         }
         .tabs {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             margin-top: 3vh;
-            gap: 15px;
+            gap: 10px;
+            max-width: 95%;
         }
         .tab {
             padding: 10px 20px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             background-color: #444;
             color: #f0f0f0;
             border-radius: 50px;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            flex: 1;
             text-align: center;
-            min-width: 120px; /* 탭 크기 통일 */
+            min-width: 100px;
         }
         .tab:hover, .tab.active {
             background-color: #666;
@@ -70,7 +73,7 @@
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.3s ease;
             padding: 20px;
-            width: 80%;
+            width: 90%;
             max-width: 800px;
         }
         .search-container.show {
@@ -79,8 +82,8 @@
             transform: translateY(0);
         }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 24px;
+            font-size: 14px;
             background: #444;
             color: #f0f0f0;
             border: none;
@@ -92,13 +95,16 @@
             background: #666;
             color: #80b3ff;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             header {
-                font-size: 6vw;
+                font-size: 7vw;
             }
             .tab {
-                font-size: 16px;
-                padding: 8px 15px;
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            .search-container {
+                width: 95%;
             }
         }
     </style>
@@ -135,18 +141,15 @@
             document.querySelectorAll(".tab").forEach(tab => {
                 tab.addEventListener("click", function() {
                     const tabId = this.getAttribute("data-tab");
-
                     document.querySelectorAll(".search-container").forEach(container => {
                         container.classList.remove("show");
                     });
                     document.getElementById(tabId).classList.add("show");
-
                     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
                     this.classList.add("active");
                 });
             });
         });
-
         document.getElementById("copyBtn").addEventListener("click", () => {
             const link = window.location.href;
             if (navigator.clipboard) {
@@ -160,7 +163,6 @@
                 fallbackCopyText(link);
             }
         });
-
         function fallbackCopyText(text) {
             const tempInput = document.createElement("textarea");
             document.body.appendChild(tempInput);
