@@ -95,6 +95,68 @@
             background: #666;
             color: #80b3ff;
         }
+
+        /* 📌 챗봇 스타일 */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .chat-header {
+            background: #444;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+        }
+        .chat-message {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        .bot {
+            background: #555;
+            align-self: flex-start;
+        }
+        .user {
+            background: #80b3ff;
+            align-self: flex-end;
+            color: #000;
+        }
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
+            background: #444;
+        }
+        #chat-input {
+            flex: 1;
+            padding: 5px;
+            border: none;
+            outline: none;
+            background: #333;
+            color: #fff;
+        }
+        #send-btn {
+            background: #80b3ff;
+            color: #000;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
         @media (max-width: 600px) {
             header {
                 font-size: 7vw;
@@ -136,6 +198,18 @@
         <button id="copyBtn">링크 복사</button>
     </div>
 
+    <!-- 📌 챗봇 UI -->
+    <div class="chatbot-container">
+        <div class="chat-header">AI 챗봇</div>
+        <div class="chat-box" id="chat-box">
+            <div class="chat-message bot">안녕하세요! 무엇을 도와드릴까요?</div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="메시지를 입력하세요...">
+            <button id="send-btn">전송</button>
+        </div>
+    </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".tab").forEach(tab => {
@@ -145,33 +219,28 @@
                         container.classList.remove("show");
                     });
                     document.getElementById(tabId).classList.add("show");
-                    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-                    this.classList.add("active");
                 });
             });
-        });
-        document.getElementById("copyBtn").addEventListener("click", () => {
-            const link = window.location.href;
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(link).then(() => {
-                    alert("링크가 복사되었습니다!");
-                }).catch(err => {
-                    console.error("클립보드 복사 실패: ", err);
-                    fallbackCopyText(link);
-                });
-            } else {
-                fallbackCopyText(link);
+
+            document.getElementById("send-btn").addEventListener("click", sendMessage);
+            document.getElementById("chat-input").addEventListener("keypress", (e) => {
+                if (e.key === "Enter") sendMessage();
+            });
+
+            function sendMessage() {
+                const userMessage = document.getElementById("chat-input").value.trim();
+                if (!userMessage) return;
+                appendMessage("user", userMessage);
+                setTimeout(() => appendMessage("bot", "이해하지 못했어요."), 500);
+            }
+
+            function appendMessage(sender, message) {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("chat-message", sender);
+                messageElement.textContent = message;
+                document.getElementById("chat-box").appendChild(messageElement);
             }
         });
-        function fallbackCopyText(text) {
-            const tempInput = document.createElement("textarea");
-            document.body.appendChild(tempInput);
-            tempInput.value = text;
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            alert("링크가 복사되었습니다!");
-        }
     </script>
 </body>
 </html>
