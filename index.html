@@ -28,7 +28,7 @@
             text-align: center;
             padding: 4vh 0;
             font-size: 5vw;
-            color: #f0f0f0; /* 흰색으로 설정 */
+            color: #f0f0f0;
             text-transform: uppercase;
             letter-spacing: 3px;
             font-weight: 700;
@@ -38,7 +38,7 @@
 
         header:hover {
             transform: scale(1.1);
-            color: #80b3ff; /* 마우스 호버 시 파란색으로 변경 */
+            color: #80b3ff;
         }
 
         h1 a {
@@ -65,8 +65,8 @@
             padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
-            background-color: #444; /* 어두운 회색 배경 */
-            color: #f0f0f0; /* 텍스트 색상 변경 */
+            background-color: #444;
+            color: #f0f0f0;
             border-radius: 50px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease, transform 0.3s ease;
@@ -74,11 +74,11 @@
 
         .tab:hover {
             background-color: #666;
-            color: #80b3ff; /* 호버 시 색상 변경 */
+            color: #80b3ff;
         }
 
         .tab.active {
-            background-color: #666; /* 선택된 탭 */
+            background-color: #666;
             font-weight: bold;
         }
 
@@ -104,7 +104,6 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            animation: fadeIn 0.5s ease-in-out;
         }
 
         .calculator input {
@@ -114,13 +113,12 @@
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 10px;
-            border: 2px solid #444; /* 어두운 회색 테두리 */
+            border: 2px solid #444;
             background: #fff;
-            transition: border 0.3s ease, box-shadow 0.3s ease;
         }
 
         .calculator input:focus {
-            border: 2px solid #666; /* 더 밝은 회색 테두리 */
+            border: 2px solid #666;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
             outline: none;
         }
@@ -128,8 +126,8 @@
         .calculator button {
             padding: 15px;
             font-size: 18px;
-            background-color: #444; /* 어두운 회색 버튼 배경 */
-            color: #f0f0f0; /* 버튼 텍스트 색상 변경 */
+            background-color: #444;
+            color: #f0f0f0;
             border: none;
             border-radius: 12px;
             cursor: pointer;
@@ -140,14 +138,10 @@
             background-color: #666;
             transform: scale(1.1);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            color: #80b3ff; /* 버튼 호버 시 텍스트 색상 변경 */
+            color: #80b3ff;
         }
 
         /* 메모 기능 스타일 */
-        .memo {
-            margin-top: 10px;
-        }
-
         .memo textarea {
             width: 100%;
             height: 150px;
@@ -156,30 +150,28 @@
             border-radius: 12px;
             border: 1px solid #ccc;
             background: #fff;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .memo textarea:focus {
-            border-color: #666; /* 더 밝은 회색으로 변함 */
+            border-color: #666;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
             outline: none;
         }
 
         .memo button {
             margin-top: 10px;
-            background-color: #444; /* 어두운 회색 버튼 배경 */
-            color: #f0f0f0; /* 버튼 텍스트 색상 변경 */
+            background-color: #444;
+            color: #f0f0f0;
             padding: 12px 20px;
             border-radius: 12px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .memo button:hover {
             background-color: #666;
             transform: scale(1.1);
-            color: #80b3ff; /* 버튼 호버 시 텍스트 색상 변경 */
+            color: #80b3ff;
         }
 
         /* 도움말 스타일 */
@@ -187,7 +179,6 @@
             margin-top: 10px;
         }
 
-        /* 추가 애니메이션 효과 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -205,13 +196,11 @@
         <h1><a href="/INSECT_Portal/">INSECT Portal</a></h1>
     </header>
 
-    <!-- 탭들 -->
     <div class="tabs">
         <div class="tab active" onclick="showTab('search')">검색</div>
         <div class="tab" onclick="showTab('portal')">포털</div>
     </div>
 
-    <!-- 탭 콘텐츠 -->
     <div class="search-container show" id="search">
         <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
         <div class="gcse-search"></div>
@@ -267,46 +256,45 @@
     </div>
 
     <script>
-        // 페이지 로드 시 로컬 스토리지에서 메모를 불러오기
         window.onload = function() {
             const savedMemo = localStorage.getItem('memo');
             if (savedMemo) {
                 document.getElementById('memo-area').value = savedMemo;
             }
-        }
+        };
 
         function showTab(tabId) {
-            document.querySelectorAll('.search-container').forEach(function(tabContent) {
-                tabContent.classList.remove('show');
-                tabContent.classList.add('hide');
-            });
-
-            document.querySelectorAll('.tab').forEach(function(tab) {
-                tab.classList.remove('active');
-            });
-
-            document.getElementById(tabId).classList.add('show');
-            document.getElementById(tabId).classList.remove('hide');
-
-            const activeTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
-            activeTab.classList.add('active');
+            toggleTab(tabId, '.search-container', '.tab');
         }
 
         function showPortalTab(tabId) {
-            document.querySelectorAll('#portal .search-container').forEach(function(tabContent) {
-                tabContent.classList.remove('show');
-                tabContent.classList.add('hide');
-            });
+            toggleTab(tabId, '#portal .search-container', '#portal .tab');
+        }
 
-            document.querySelectorAll('#portal .tab').forEach(function(tab) {
-                tab.classList.remove('active');
-            });
+        function toggleTab(tabId, contentSelector, tabSelector) {
+            const tabContent = document.querySelectorAll(contentSelector);
+            if (tabContent) {
+                tabContent.forEach(function(tabContent) {
+                    tabContent.classList.remove('show');
+                });
+            }
 
-            document.getElementById(tabId).classList.add('show');
-            document.getElementById(tabId).classList.remove('hide');
+            const tabs = document.querySelectorAll(tabSelector);
+            if (tabs) {
+                tabs.forEach(function(tab) {
+                    tab.classList.remove('active');
+                });
+            }
 
-            const activeTab = document.querySelector(`#portal .tab[onclick="showPortalTab('${tabId}')"]`);
-            activeTab.classList.add('active');
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.add('show');
+            }
+
+            const activeTab = document.querySelector(`${tabSelector}[onclick="showTab('${tabId}')"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
         }
 
         function copyLink() {
@@ -318,7 +306,6 @@
             });
         }
 
-        // 계산기 관련 함수들
         let currentInput = '';
         function appendNumber(number) {
             currentInput += number;
@@ -344,7 +331,6 @@
             }
         }
 
-        // 메모 저장
         function saveMemo() {
             const memoText = document.getElementById('memo-area').value;
             localStorage.setItem('memo', memoText);
@@ -353,3 +339,4 @@
     </script>
 </body>
 </html>
+
