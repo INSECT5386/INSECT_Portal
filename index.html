@@ -13,80 +13,83 @@
         /* 기본 스타일 */
         body {
             font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle, #ff7e5f, #feb47b); /* 밝은 그라데이션 배경 */
-            color: #333;  /* 텍스트를 더 어두운 색으로 변경 */
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* 그라데이션 배경 */
+            color: #333;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
             transition: background-color 0.4s ease, color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         header {
             text-align: center;
-            padding: 3vh 0; /* 상단 여백을 더 줄여서 검색창을 더 위로 이동 */
-            font-size: 6vw;
-            color: #ffffff;  /* 텍스트 색상 변경 */
+            padding: 4vh 0;
+            font-size: 5vw;
+            color: #fff;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            font-weight: 900;
-            transition: transform 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
+            letter-spacing: 3px;
+            font-weight: 700;
+            transition: transform 0.3s ease, color 0.3s ease;
+            margin-bottom: 20px;
         }
 
         header:hover {
-            transform: rotate(-3deg); /* 미세한 회전 효과 */
-            color: #004d40;  /* 색상 변환 */
-            letter-spacing: 8px; /* 문자 간격 증가 */
+            transform: scale(1.1);
+            color: #004d40;
         }
 
         h1 a {
             color: inherit;
             text-decoration: none;
-            font-size: 6vw;
+            font-size: 5vw;
             transition: color 0.3s ease, transform 0.3s ease;
         }
 
         h1 a:hover {
             color: #004d40;
-            transform: scale(1.05); /* 약간 확대 */
+            transform: scale(1.05);
         }
 
         /* 탭 스타일 */
         .tabs {
             display: flex;
             justify-content: center;
-            margin-top: 2vh;
-            transition: all 0.3s ease-in-out;
+            margin-top: 3vh;
+            gap: 15px;
         }
 
         .tab {
-            padding: 12px 20px;
-            margin: 0 5px;
+            padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
             background-color: #ff7e5f;
-            color: white;
+            color: #fff;
             border-radius: 50px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .tab:hover {
             background-color: #feb47b;
-            transform: scale(1.05); /* 탭 확대 효과 */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 */
+            transform: scale(1.1);
         }
 
         .tab.active {
             background-color: #feb47b;
-            font-weight: bold; /* 강조 효과 */
+            font-weight: bold;
         }
 
         /* 탭 콘텐츠 스타일 */
         .search-container {
             display: none;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
+            transition: opacity 0.5s ease, transform 0.3s ease;
             padding: 20px;
+            width: 80%;
+            max-width: 800px;
         }
 
         .search-container.show {
@@ -95,18 +98,13 @@
             transform: translateY(0);
         }
 
-        .search-container.hide {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-
         /* 계산기 스타일 */
         .calculator {
             font-size: 18px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            animation: fadeIn 0.5s ease-in-out; /* 애니메이션 추가 */
+            gap: 15px;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .calculator input {
@@ -114,7 +112,7 @@
             font-size: 24px;
             text-align: right;
             padding: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border-radius: 10px;
             border: 2px solid #ff7e5f;
             background: #fff;
@@ -147,7 +145,6 @@
         /* 메모 기능 스타일 */
         .memo {
             margin-top: 10px;
-            animation: fadeIn 0.5s ease-in-out; /* 애니메이션 추가 */
         }
 
         .memo textarea {
@@ -277,43 +274,35 @@
         }
 
         function showTab(tabId) {
-            // 모든 탭 숨기기
             document.querySelectorAll('.search-container').forEach(function(tabContent) {
                 tabContent.classList.remove('show');
                 tabContent.classList.add('hide');
             });
 
-            // 모든 탭 비활성화
             document.querySelectorAll('.tab').forEach(function(tab) {
                 tab.classList.remove('active');
             });
 
-            // 선택한 탭 내용 보여주기
             document.getElementById(tabId).classList.add('show');
             document.getElementById(tabId).classList.remove('hide');
 
-            // 선택한 탭 활성화
             const activeTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
             activeTab.classList.add('active');
         }
 
         function showPortalTab(tabId) {
-            // 포털 탭 내부 탭 숨기기
             document.querySelectorAll('#portal .search-container').forEach(function(tabContent) {
                 tabContent.classList.remove('show');
                 tabContent.classList.add('hide');
             });
 
-            // 포털 탭 비활성화
             document.querySelectorAll('#portal .tab').forEach(function(tab) {
                 tab.classList.remove('active');
             });
 
-            // 선택한 포털 탭 내용 보여주기
             document.getElementById(tabId).classList.add('show');
             document.getElementById(tabId).classList.remove('hide');
 
-            // 선택한 포털 탭 활성화
             const activeTab = document.querySelector(`#portal .tab[onclick="showPortalTab('${tabId}')"]`);
             activeTab.classList.add('active');
         }
@@ -362,4 +351,3 @@
     </script>
 </body>
 </html>
-
