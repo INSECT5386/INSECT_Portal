@@ -29,27 +29,12 @@
             letter-spacing: 3px;
             font-weight: 700;
             margin-bottom: 20px;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-        header:hover {
-            transform: scale(1.05);
-            color: #80b3ff;
-        }
-        h1 a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        h1 a:hover {
-            color: #80b3ff;
         }
         .tabs {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             margin-top: 3vh;
             gap: 10px;
-            max-width: 95%;
         }
         .tab {
             padding: 10px 20px;
@@ -58,28 +43,20 @@
             background-color: #444;
             color: #f0f0f0;
             border-radius: 50px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            flex: 1;
-            text-align: center;
-            min-width: 100px;
+            transition: background-color 0.3s ease;
         }
         .tab:hover, .tab.active {
             background-color: #666;
             color: #80b3ff;
-            font-weight: bold;
         }
         .search-container {
             display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.3s ease;
             padding: 20px;
             width: 90%;
             max-width: 800px;
         }
         .search-container.show {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
         }
         button {
             padding: 12px 24px;
@@ -89,14 +66,13 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background 0.3s ease;
         }
         button:hover {
             background: #666;
             color: #80b3ff;
         }
 
-        /* 📌 챗봇 스타일 */
+        /* 📌 챗봇 스타일 (초기에는 숨김) */
         .chatbot-container {
             position: fixed;
             bottom: 20px;
@@ -106,6 +82,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            display: none; /* 기본적으로 숨김 */
         }
         .chat-header {
             background: #444;
@@ -129,11 +106,9 @@
         }
         .bot {
             background: #555;
-            align-self: flex-start;
         }
         .user {
             background: #80b3ff;
-            align-self: flex-end;
             color: #000;
         }
         .chat-input-container {
@@ -155,19 +130,6 @@
             border: none;
             padding: 5px 10px;
             cursor: pointer;
-        }
-
-        @media (max-width: 600px) {
-            header {
-                font-size: 7vw;
-            }
-            .tab {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-            .search-container {
-                width: 95%;
-            }
         }
     </style>
 </head>
@@ -198,8 +160,8 @@
         <button id="copyBtn">링크 복사</button>
     </div>
 
-    <!-- 📌 챗봇 UI -->
-    <div class="chatbot-container">
+    <!-- 📌 챗봇 (초기에는 숨김) -->
+    <div class="chatbot-container" id="chatbot">
         <div class="chat-header">AI 챗봇</div>
         <div class="chat-box" id="chat-box">
             <div class="chat-message bot">안녕하세요! 무엇을 도와드릴까요?</div>
@@ -212,16 +174,35 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll(".tab").forEach(tab => {
+            const chatbot = document.getElementById("chatbot");
+            const tabs = document.querySelectorAll(".tab");
+
+            tabs.forEach(tab => {
                 tab.addEventListener("click", function() {
                     const tabId = this.getAttribute("data-tab");
+
+                    // 모든 컨텐츠 숨기기
                     document.querySelectorAll(".search-container").forEach(container => {
                         container.classList.remove("show");
                     });
+
+                    // 선택한 컨텐츠 보이기
                     document.getElementById(tabId).classList.add("show");
+
+                    // AI 탭을 클릭하면 챗봇 보이기, 아니면 숨기기
+                    if (tabId === "ai") {
+                        chatbot.style.display = "block";
+                    } else {
+                        chatbot.style.display = "none";
+                    }
+
+                    // 탭 활성화 처리
+                    tabs.forEach(t => t.classList.remove("active"));
+                    this.classList.add("active");
                 });
             });
 
+            // 챗봇 메시지 전송 기능
             document.getElementById("send-btn").addEventListener("click", sendMessage);
             document.getElementById("chat-input").addEventListener("keypress", (e) => {
                 if (e.key === "Enter") sendMessage();
