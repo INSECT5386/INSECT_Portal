@@ -14,7 +14,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(45deg, #333, #111); /* 어두운 그라데이션 배경 */
-            color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+            color: #f0f0f0; /* 텍스트 색상 변경 */
             margin: 0;
             padding: 0;
             overflow-x: hidden;
@@ -28,7 +28,7 @@
             text-align: center;
             padding: 4vh 0;
             font-size: 5vw;
-            color: #fff;
+            color: #f0f0f0; /* 흰색으로 설정 */
             text-transform: uppercase;
             letter-spacing: 3px;
             font-weight: 700;
@@ -38,7 +38,7 @@
 
         header:hover {
             transform: scale(1.1);
-            color: #004d40;
+            color: #80b3ff; /* 마우스 호버 시 파란색으로 변경 */
         }
 
         h1 a {
@@ -49,7 +49,7 @@
         }
 
         h1 a:hover {
-            color: #004d40;
+            color: #80b3ff;
             transform: scale(1.05);
         }
 
@@ -66,15 +66,15 @@
             font-size: 18px;
             cursor: pointer;
             background-color: #444; /* 어두운 회색 배경 */
-            color: #fff;
+            color: #f0f0f0; /* 텍스트 색상 변경 */
             border-radius: 50px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .tab:hover {
-            background-color: #666; /* 더 밝은 회색으로 변함 */
-            transform: scale(1.1);
+            background-color: #666;
+            color: #80b3ff; /* 호버 시 색상 변경 */
         }
 
         .tab.active {
@@ -129,7 +129,7 @@
             padding: 15px;
             font-size: 18px;
             background-color: #444; /* 어두운 회색 버튼 배경 */
-            color: white;
+            color: #f0f0f0; /* 버튼 텍스트 색상 변경 */
             border: none;
             border-radius: 12px;
             cursor: pointer;
@@ -137,9 +137,10 @@
         }
 
         .calculator button:hover {
-            background-color: #666; /* 더 밝은 회색으로 변함 */
+            background-color: #666;
             transform: scale(1.1);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: #80b3ff; /* 버튼 호버 시 텍스트 색상 변경 */
         }
 
         /* 메모 기능 스타일 */
@@ -167,7 +168,7 @@
         .memo button {
             margin-top: 10px;
             background-color: #444; /* 어두운 회색 버튼 배경 */
-            color: white;
+            color: #f0f0f0; /* 버튼 텍스트 색상 변경 */
             padding: 12px 20px;
             border-radius: 12px;
             font-size: 16px;
@@ -176,8 +177,9 @@
         }
 
         .memo button:hover {
-            background-color: #666; /* 더 밝은 회색으로 변함 */
+            background-color: #666;
             transform: scale(1.1);
+            color: #80b3ff; /* 버튼 호버 시 텍스트 색상 변경 */
         }
 
         /* 도움말 스타일 */
