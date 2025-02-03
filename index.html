@@ -10,57 +10,45 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* 기본 스타일 */
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(45deg, #333, #111); /* 어두운 그라데이션 배경 */
-            color: #f0f0f0; /* 텍스트 색상 변경 */
+            background: linear-gradient(45deg, #333, #111);
+            color: #f0f0f0;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         header {
             text-align: center;
             padding: 4vh 0;
-            font-size: 5vw;
+            font-size: 4vw;
             color: #f0f0f0;
             text-transform: uppercase;
             letter-spacing: 3px;
             font-weight: 700;
-            transition: transform 0.3s ease, color 0.3s ease;
             margin-bottom: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
-
         header:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             color: #80b3ff;
         }
-
         h1 a {
             color: inherit;
             text-decoration: none;
-            font-size: 5vw;
-            transition: color 0.3s ease, transform 0.3s ease;
+            transition: color 0.3s ease;
         }
-
         h1 a:hover {
             color: #80b3ff;
-            transform: scale(1.05);
         }
-
-        /* 탭 스타일 */
         .tabs {
             display: flex;
             justify-content: center;
             margin-top: 3vh;
             gap: 15px;
         }
-
         .tab {
             padding: 10px 20px;
             font-size: 18px;
@@ -68,21 +56,13 @@
             background-color: #444;
             color: #f0f0f0;
             border-radius: 50px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-
-        .tab:hover {
+        .tab:hover, .tab.active {
             background-color: #666;
             color: #80b3ff;
-        }
-
-        .tab.active {
-            background-color: #666;
             font-weight: bold;
         }
-
-        /* 탭 콘텐츠 스타일 */
         .search-container {
             display: none;
             opacity: 0;
@@ -91,102 +71,32 @@
             width: 80%;
             max-width: 800px;
         }
-
         .search-container.show {
             display: block;
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* 계산기 스타일 */
-        .calculator {
-            font-size: 18px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .calculator input {
-            grid-column: span 4;
-            font-size: 24px;
-            text-align: right;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            border: 2px solid #444;
-            background: #fff;
-        }
-
-        .calculator input:focus {
-            border: 2px solid #666;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-            outline: none;
-        }
-
-        .calculator button {
-            padding: 15px;
-            font-size: 18px;
-            background-color: #444;
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #444;
             color: #f0f0f0;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease;
         }
-
-        .calculator button:hover {
-            background-color: #666;
-            transform: scale(1.1);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        button:hover {
+            background: #666;
             color: #80b3ff;
         }
-
-        /* 메모 기능 스타일 */
-        .memo textarea {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 12px;
-            border: 1px solid #ccc;
-            background: #fff;
-        }
-
-        .memo textarea:focus {
-            border-color: #666;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-            outline: none;
-        }
-
-        .memo button {
-            margin-top: 10px;
-            background-color: #444;
-            color: #f0f0f0;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .memo button:hover {
-            background-color: #666;
-            transform: scale(1.1);
-            color: #80b3ff;
-        }
-
-        /* 도움말 스타일 */
-        .help {
-            margin-top: 10px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
+        @media (max-width: 768px) {
+            header {
+                font-size: 6vw;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .tab {
+                font-size: 16px;
+                padding: 8px 15px;
             }
         }
     </style>
@@ -197,9 +107,9 @@
     </header>
 
     <div class="tabs">
-        <div class="tab active" onclick="showTab('search')">검색</div>
-        <div class="tab" onclick="showTab('portal')">포털</div>
-        <div class="tab" onclick="showTab('ai')">AI</div> <!-- AI 탭 추가 -->
+        <div class="tab active" data-tab="search">검색</div>
+        <div class="tab" data-tab="ai">AI</div>
+        <div class="tab" data-tab="link">링크 복사</div>
     </div>
 
     <div class="search-container show" id="search">
@@ -207,140 +117,56 @@
         <div class="gcse-search"></div>
     </div>
 
-    <div class="search-container" id="portal">
-        <div class="tabs">
-            <div class="tab" onclick="showPortalTab('calculator')">계산기</div>
-            <div class="tab" onclick="showPortalTab('memo')">메모</div>
-            <div class="tab" onclick="showPortalTab('help')">도움말</div>
-            <div class="tab" onclick="showPortalTab('link')">링크 복사</div>
-        </div>
-
-        <div class="search-container" id="calculator">
-            <div class="calculator">
-                <input type="text" id="calc-display" disabled />
-                <button onclick="appendNumber('1')">1</button>
-                <button onclick="appendNumber('2')">2</button>
-                <button onclick="appendNumber('3')">3</button>
-                <button onclick="appendNumber('4')">4</button>
-                <button onclick="appendNumber('5')">5</button>
-                <button onclick="appendNumber('6')">6</button>
-                <button onclick="appendNumber('7')">7</button>
-                <button onclick="appendNumber('8')">8</button>
-                <button onclick="appendNumber('9')">9</button>
-                <button onclick="appendNumber('0')">0</button>
-                <button onclick="clearDisplay()">C</button>
-                <button onclick="calculate()">=</button>
-                <button onclick="appendOperator('+')">+</button>
-                <button onclick="appendOperator('-')">-</button>
-                <button onclick="appendOperator('*')">*</button>
-                <button onclick="appendOperator('/')">/</button>
-            </div>
-        </div>
-
-        <div class="search-container" id="memo">
-            <div class="memo">
-                <textarea id="memo-area" placeholder="메모를 입력하세요..."></textarea>
-                <button onclick="saveMemo()">저장</button>
-            </div>
-        </div>
-
-        <div class="search-container" id="help">
-            <h2>도움말</h2>
-            <p>사이트 사용 방법에 대한 정보를 제공합니다. 각 탭을 클릭하여 기능을 사용해보세요.</p>
-        </div>
-
-        <div class="search-container" id="link">
-            <h2>링크 복사</h2>
-            <p>INSECT Portal 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
-            <button onclick="copyLink()">링크 복사</button>
-        </div>
-    </div>
-
     <div class="search-container" id="ai">
         <h2>AI 기능</h2>
         <p>여기서 AI 관련 작업을 할 수 있습니다.</p>
     </div>
 
+    <div class="search-container" id="link">
+        <h2>링크 복사</h2>
+        <p>INSECT Portal 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
+        <button id="copyBtn">링크 복사</button>
+    </div>
+
     <script>
-        window.onload = function() {
-            const savedMemo = localStorage.getItem('memo');
-            if (savedMemo) {
-                document.getElementById('memo-area').value = savedMemo;
-            }
-        };
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".tab").forEach(tab => {
+                tab.addEventListener("click", function() {
+                    const tabId = this.getAttribute("data-tab");
 
-        function showTab(tabId) {
-            toggleTab(tabId, '.search-container', '.tab');
-        }
+                    document.querySelectorAll(".search-container").forEach(container => {
+                        container.classList.remove("show");
+                    });
+                    document.getElementById(tabId).classList.add("show");
 
-        function showPortalTab(tabId) {
-            toggleTab(tabId, '#portal .search-container', '#portal .tab');
-        }
-
-        function toggleTab(tabId, contentSelector, tabSelector) {
-            const tabContent = document.querySelectorAll(contentSelector);
-            if (tabContent) {
-                tabContent.forEach(function(tabContent) {
-                    tabContent.classList.remove('show');
+                    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+                    this.classList.add("active");
                 });
-            }
-
-            const tabs = document.querySelectorAll(tabSelector);
-            if (tabs) {
-                tabs.forEach(function(tab) {
-                    tab.classList.remove('active');
-                });
-            }
-
-            const targetTab = document.getElementById(tabId);
-            if (targetTab) {
-                targetTab.classList.add('show');
-            }
-
-            const activeTab = document.querySelector(`${tabSelector}[onclick="showTab('${tabId}')"]`);
-            if (activeTab) {
-                activeTab.classList.add('active');
-            }
-        }
-
-        function copyLink() {
-            const link = window.location.href;
-            navigator.clipboard.writeText(link).then(function() {
-                alert("링크가 복사되었습니다!");
-            }).catch(function(error) {
-                alert("링크 복사에 실패했습니다: " + error);
             });
-        }
+        });
 
-        let currentInput = '';
-        function appendNumber(number) {
-            currentInput += number;
-            document.getElementById('calc-display').value = currentInput;
-        }
-
-        function appendOperator(operator) {
-            currentInput += ' ' + operator + ' ';
-            document.getElementById('calc-display').value = currentInput;
-        }
-
-        function clearDisplay() {
-            currentInput = '';
-            document.getElementById('calc-display').value = '';
-        }
-
-        function calculate() {
-            try {
-                currentInput = eval(currentInput).toString();
-                document.getElementById('calc-display').value = currentInput;
-            } catch (e) {
-                document.getElementById('calc-display').value = '오류';
+        document.getElementById("copyBtn").addEventListener("click", () => {
+            const link = window.location.href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(link).then(() => {
+                    alert("링크가 복사되었습니다!");
+                }).catch(err => {
+                    console.error("클립보드 복사 실패: ", err);
+                    fallbackCopyText(link);
+                });
+            } else {
+                fallbackCopyText(link);
             }
-        }
+        });
 
-        function saveMemo() {
-            const memoText = document.getElementById('memo-area').value;
-            localStorage.setItem('memo', memoText);
-            alert('메모가 저장되었습니다!');
+        function fallbackCopyText(text) {
+            const tempInput = document.createElement("textarea");
+            document.body.appendChild(tempInput);
+            tempInput.value = text;
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("링크가 복사되었습니다!");
         }
     </script>
 </body>
