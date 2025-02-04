@@ -1,1 +1,1 @@
-https://insect5386.github.io/INSECTIUM
+https://insect5386.github.io/NaturaLink/
