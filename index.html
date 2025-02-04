@@ -9,10 +9,6 @@
     <title>NaturaLink</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- BotUI 스타일과 스크립트 로드 -->
-    <link href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.min.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -191,7 +187,6 @@
             });
         });
 
-        // 링크 복사 기능
         document.getElementById("copyBtn").addEventListener("click", () => {
             const link = window.location.href;
             if (navigator.clipboard) {
@@ -216,8 +211,6 @@
             alert("링크가 복사되었습니다!");
         }
 
-        // AI 챗봇 기능
-        const botui = new BotUI('chatbox');
         document.getElementById("sendMessageBtn").addEventListener("click", () => {
             const userInput = document.getElementById("userInput").value;
             if (userInput.trim() !== "") {
@@ -227,13 +220,6 @@
                 chatlogs.appendChild(userMessage);
                 document.getElementById("userInput").value = "";
                 chatlogs.scrollTop = chatlogs.scrollHeight;
-
-                // Simulate AI response
-                botui.message.add({
-                    content: 'AI: ' + "저는 AI입니다! 당신의 메시지를 이해했어요." // Default AI response
-                }).then(() => {
-                    chatlogs.scrollTop = chatlogs.scrollHeight;
-                });
             }
         });
     </script>
