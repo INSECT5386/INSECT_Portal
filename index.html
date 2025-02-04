@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="INSECTIUM">
-    <meta property="og:title" content="INSECTIUM">
-    <meta property="og:description" content="INSECTIUM">
-    <title>INSECTIUM</title>
+    <meta name="description" content="NaturaLink">
+    <meta property="og:title" content="NaturaLink">
+    <meta property="og:description" content="NaturaLink">
+    <title>NaturaLink</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -146,52 +146,47 @@
 </head>
 <body>
     <header>
-        <h1><a href="/INSECTIUM/">INSECTIUM</a></h1>
+        <h1><a href="/NaturaLink/">NaturaLink</a></h1>
     </header>
-
     <div class="tabs">
         <div class="tab active" data-tab="search">검색</div>
         <div class="tab" data-tab="link">링크 복사</div>
     </div>
-
     <div class="search-container show" id="search">
         <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
         <div class="gcse-search"></div>
     </div>
-
     <div class="search-container" id="link">
         <h2>링크 복사</h2>
-        <p>INSECTIUM 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
+        <p>NaturaLink 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
         <button id="copyBtn">링크 복사</button>
     </div>
-
     <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
     <script>
-      window.addEventListener("DOMContentLoaded", function() {
-        window.AgentInitializer.init({
-          agentRenderURL: "https://agent.jotform.com/0194cbdfbabc7c76bb0f52a7e87999c89679",
-          rootId: "JotformAgent-0194cbdfbabc7c76bb0f52a7e87999c89679",
-          formID: "0194cbdfbabc7c76bb0f52a7e87999c89679",
-          queryParams: ["skipWelcome=1", "maximizable=1"],
-          domain: "https://www.jform.co.kr",
-          isInitialOpen: false,
-          isDraggable: false,
-          background: "linear-gradient(180deg, #424757 0%, #424757 100%)",
-          buttonBackgroundColor: "#11111B",
-          buttonIconColor: "#FFF",
-          variant: false,
-          customizations: {
-            "greeting": "Yes",
-            "greetingMessage": "안녕하세요. INSECTIUM AI입니다.",
-            "openByDefault": "No",
-            "pulse": "Yes",
-            "position": "right"
-          },
-          isVoice: undefined
+        window.addEventListener("DOMContentLoaded", function() {
+            window.AgentInitializer.init({
+                agentRenderURL: "https://agent.jotform.com/0194cbdfbabc7c76bb0f52a7e87999c89679",
+                rootId: "JotformAgent-0194cbdfbabc7c76bb0f52a7e87999c89679",
+                formID: "0194cbdfbabc7c76bb0f52a7e87999c89679",
+                queryParams: ["skipWelcome=1", "maximizable=1"],
+                domain: "https://www.jform.co.kr",
+                isInitialOpen: false,
+                isDraggable: false,
+                background: "linear-gradient(180deg, #424757 0%, #424757 100%)",
+                buttonBackgroundColor: "#11111B",
+                buttonIconColor: "#FFF",
+                variant: false,
+                customizations: {
+                    "greeting": "Yes",
+                    "greetingMessage": "안녕하세요. NaturaLink AI입니다.",
+                    "openByDefault": "No",
+                    "pulse": "Yes",
+                    "position": "right"
+                },
+                isVoice: undefined
+            });
         });
-      });
     </script>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".tab").forEach(tab => {
@@ -206,7 +201,7 @@
                 });
             });
         });
-        
+
         document.getElementById("copyBtn").addEventListener("click", () => {
             const link = window.location.href;
             if (navigator.clipboard) {
@@ -220,7 +215,7 @@
                 fallbackCopyText(link);
             }
         });
-        
+
         function fallbackCopyText(text) {
             const tempInput = document.createElement("textarea");
             document.body.appendChild(tempInput);
