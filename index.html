@@ -147,7 +147,7 @@
 
         .question-list {
             margin: 20px 0;
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 10px;
         }
@@ -219,10 +219,9 @@
         <div id="chatbox">
             <div id="chatlogs"></div>
             <div id="userInputContainer">
-                <input type="text" id="userInput" placeholder="질문을 입력하세요..." />
                 <button id="sendBtn">전송</button>
             </div>
-            <div class="question-list">
+            <div class="question-list" id="questionList">
                 <div class="question-item" onclick="sendQuestion('안녕하세요')">안녕하세요</div>
                 <div class="question-item" onclick="sendQuestion('도움')">도움이 필요해요</div>
                 <div class="question-item" onclick="sendQuestion('NaturaLink')">NaturaLink는 무엇인가요?</div>
@@ -272,17 +271,9 @@
             alert("링크가 복사되었습니다!");
         }
 
-        document.getElementById("sendBtn").addEventListener("click", () => {
-            const userInput = document.getElementById("userInput").value.trim();
-            if (userInput) {
-                sendQuestion(userInput);
-                document.getElementById("userInput").value = ""; // 입력창 비우기
-            }
-        });
-
         function sendQuestion(question) {
             const chatlogs = document.getElementById("chatlogs");
-            const questionList = document.querySelector(".question-list");
+            const questionList = document.getElementById("questionList");
 
             // 사용자 질문 표시
             const userMessage = document.createElement("div");
@@ -304,7 +295,7 @@
 
         document.getElementById("clearChatBtn").addEventListener("click", () => {
             document.getElementById("chatlogs").innerHTML = "";
-            document.querySelector(".question-list").style.display = "none"; // 질문 목록 숨기기
+            document.getElementById("questionList").style.display = "none"; // 질문 목록 숨기기
         });
 
         // 다양한 질문에 대한 응답 추가
