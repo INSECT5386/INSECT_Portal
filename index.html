@@ -219,15 +219,17 @@
         <div id="chatbox">
             <div id="chatlogs"></div>
             <div id="userInputContainer">
-                <div class="question-list">
-                    <div class="question-item" onclick="sendQuestion('안녕하세요')">안녕하세요</div>
-                    <div class="question-item" onclick="sendQuestion('도움')">도움이 필요해요</div>
-                    <div class="question-item" onclick="sendQuestion('NaturaLink')">NaturaLink는 무엇인가요?</div>
-                    <div class="question-item" onclick="sendQuestion('날씨')">날씨</div>
-                    <div class="question-item" onclick="sendQuestion('이 웹사이트는 무엇인가요?')">이 웹사이트는 무엇인가요?</div>
-                </div>
-                <button id="clearChatBtn" class="clear-btn">지우기</button>
+                <input type="text" id="userInput" placeholder="질문을 입력하세요..." />
+                <button id="sendBtn">전송</button>
             </div>
+            <div class="question-list">
+                <div class="question-item" onclick="sendQuestion('안녕하세요')">안녕하세요</div>
+                <div class="question-item" onclick="sendQuestion('도움')">도움이 필요해요</div>
+                <div class="question-item" onclick="sendQuestion('NaturaLink')">NaturaLink는 무엇인가요?</div>
+                <div class="question-item" onclick="sendQuestion('날씨')">날씨</div>
+                <div class="question-item" onclick="sendQuestion('이 웹사이트는 무엇인가요?')">이 웹사이트는 무엇인가요?</div>
+            </div>
+            <button id="clearChatBtn" class="clear-btn">지우기</button>
         </div>
     </div>
 
@@ -269,6 +271,14 @@
             document.body.removeChild(tempInput);
             alert("링크가 복사되었습니다!");
         }
+
+        document.getElementById("sendBtn").addEventListener("click", () => {
+            const userInput = document.getElementById("userInput").value.trim();
+            if (userInput) {
+                sendQuestion(userInput);
+                document.getElementById("userInput").value = ""; // 입력창 비우기
+            }
+        });
 
         function sendQuestion(question) {
             const chatlogs = document.getElementById("chatlogs");
