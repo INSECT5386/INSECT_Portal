@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(45deg, #333, #111);
+            background: linear-gradient(45deg, #222, #111);
             color: #f0f0f0;
             margin: 0;
             padding: 0;
@@ -24,54 +24,52 @@
             text-align: center;
             padding: 4vh 0;
             font-size: 4vw;
-            color: #f0f0f0;
+            color: #fff;
             text-transform: uppercase;
             letter-spacing: 3px;
             font-weight: 700;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, color 0.3s ease;
+            background: linear-gradient(90deg, rgba(128, 179, 255, 0.3), rgba(255, 255, 255, 0));
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
         }
         header:hover {
-            transform: scale(1.05);
-            color: #80b3ff;
+            transform: scale(1.02);
+            background: linear-gradient(90deg, rgba(128, 179, 255, 0.6), rgba(255, 255, 255, 0.2));
         }
         h1 a {
             color: inherit;
             text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        h1 a:hover {
-            color: #80b3ff;
         }
         .tabs {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            margin-top: 3vh;
-            gap: 10px;
-            max-width: 95%;
+            gap: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
         }
         .tab {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
-            background-color: #444;
+            background: rgba(255, 255, 255, 0.1);
             color: #f0f0f0;
             border-radius: 50px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            flex: 1;
-            text-align: center;
-            min-width: 100px;
+            transition: all 0.3s ease;
         }
         .tab:hover, .tab.active {
-            background-color: #666;
-            color: #80b3ff;
-            font-weight: bold;
+            background: #80b3ff;
+            color: #fff;
+            transform: scale(1.1);
         }
         .search-container {
             display: none;
             opacity: 0;
-            transition: opacity 0.5s ease, transform 0.3s ease;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
             padding: 20px;
             width: 90%;
             max-width: 800px;
@@ -81,51 +79,39 @@
             opacity: 1;
             transform: translateY(0);
         }
+        .search-container input {
+            width: 80%;
+            padding: 12px;
+            border-radius: 50px;
+            border: 2px solid #80b3ff;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+        .search-container input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: #fff;
+        }
         button {
             padding: 12px 24px;
             font-size: 14px;
-            background: #444;
+            font-weight: bold;
+            background: linear-gradient(45deg, #444, #222);
             color: #f0f0f0;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
         button:hover {
-            background: #666;
-            color: #80b3ff;
-        }
-        #chatbox {
-            border: 1px solid #444;
-            padding: 10px;
-            border-radius: 10px;
-            max-height: 400px;
-            overflow-y: auto;
-            width: 100%;
-        }
-        #chatlogs {
-            margin-bottom: 10px;
-        }
-        #userInput {
-            width: 80%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background-color: #222;
-            color: #f0f0f0;
-        }
-        #chatbot button {
-            width: 15%;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #444;
-            color: #f0f0f0;
-            border: none;
-            cursor: pointer;
-        }
-        #chatbot button:hover {
-            background-color: #666;
-            color: #80b3ff;
+            background: linear-gradient(45deg, #80b3ff, #0056b3);
+            color: #fff;
+            transform: scale(1.05);
         }
         @media (max-width: 600px) {
             header {
@@ -137,9 +123,6 @@
             }
             .search-container {
                 width: 95%;
-            }
-            #chatbot button {
-                width: 30%;
             }
         }
     </style>
@@ -165,33 +148,6 @@
         <button id="copyBtn">링크 복사</button>
     </div>
 
-    <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
-    <script>
-      window.addEventListener("DOMContentLoaded", function() {
-        window.AgentInitializer.init({
-          agentRenderURL: "https://agent.jotform.com/0194cbdfbabc7c76bb0f52a7e87999c89679",
-          rootId: "JotformAgent-0194cbdfbabc7c76bb0f52a7e87999c89679",
-          formID: "0194cbdfbabc7c76bb0f52a7e87999c89679",
-          queryParams: ["skipWelcome=1", "maximizable=1"],
-          domain: "https://www.jform.co.kr",
-          isInitialOpen: false,
-          isDraggable: false,
-          background: "linear-gradient(180deg, #424757 0%, #424757 100%)",
-          buttonBackgroundColor: "#11111B",
-          buttonIconColor: "#FFF",
-          variant: false,
-          customizations: {
-            "greeting": "Yes",
-            "greetingMessage": "안녕하세요. INSECTIUM AI입니다.",
-            "openByDefault": "No",
-            "pulse": "Yes",
-            "position": "right"
-          },
-          isVoice: undefined
-        });
-      });
-    </script>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".tab").forEach(tab => {
@@ -209,28 +165,12 @@
         
         document.getElementById("copyBtn").addEventListener("click", () => {
             const link = window.location.href;
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(link).then(() => {
-                    alert("링크가 복사되었습니다!");
-                }).catch(err => {
-                    console.error("클립보드 복사 실패: ", err);
-                    fallbackCopyText(link);
-                });
-            } else {
-                fallbackCopyText(link);
-            }
+            navigator.clipboard.writeText(link).then(() => {
+                alert("링크가 복사되었습니다!");
+            }).catch(err => {
+                console.error("클립보드 복사 실패: ", err);
+            });
         });
-        
-        function fallbackCopyText(text) {
-            const tempInput = document.createElement("textarea");
-            document.body.appendChild(tempInput);
-            tempInput.value = text;
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            alert("링크가 복사되었습니다!");
-        }
     </script>
 </body>
 </html>
-
