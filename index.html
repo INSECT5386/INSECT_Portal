@@ -161,32 +161,6 @@
         <p>NaturaLink 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
         <button id="copyBtn">링크 복사</button>
     </div>
-    <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
-    <script>
-        window.addEventListener("DOMContentLoaded", function() {
-            window.AgentInitializer.init({
-                agentRenderURL: "https://agent.jotform.com/0194cbdfbabc7c76bb0f52a7e87999c89679",
-                rootId: "JotformAgent-0194cbdfbabc7c76bb0f52a7e87999c89679",
-                formID: "0194cbdfbabc7c76bb0f52a7e87999c89679",
-                queryParams: ["skipWelcome=1", "maximizable=1"],
-                domain: "https://www.jform.co.kr",
-                isInitialOpen: false,
-                isDraggable: false,
-                background: "linear-gradient(180deg, #424757 0%, #424757 100%)",
-                buttonBackgroundColor: "#11111B",
-                buttonIconColor: "#FFF",
-                variant: false,
-                customizations: {
-                    "greeting": "Yes",
-                    "greetingMessage": "안녕하세요. NaturaLink AI입니다.",
-                    "openByDefault": "No",
-                    "pulse": "Yes",
-                    "position": "right"
-                },
-                isVoice: undefined
-            });
-        });
-    </script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".tab").forEach(tab => {
@@ -201,7 +175,6 @@
                 });
             });
         });
-
         document.getElementById("copyBtn").addEventListener("click", () => {
             const link = window.location.href;
             if (navigator.clipboard) {
@@ -215,7 +188,6 @@
                 fallbackCopyText(link);
             }
         });
-
         function fallbackCopyText(text) {
             const tempInput = document.createElement("textarea");
             document.body.appendChild(tempInput);
