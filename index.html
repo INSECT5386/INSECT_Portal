@@ -147,7 +147,7 @@
 
         .question-list {
             margin: 20px 0;
-            display: flex;
+            display: none;
             flex-direction: column;
             gap: 10px;
         }
@@ -272,19 +272,29 @@
 
         function sendQuestion(question) {
             const chatlogs = document.getElementById("chatlogs");
+            const questionList = document.querySelector(".question-list");
+
             // 사용자 질문 표시
             const userMessage = document.createElement("div");
             userMessage.textContent = `You: ${question}`;
             chatlogs.appendChild(userMessage);
+
             // AI 응답 표시
             const botMessage = document.createElement("div");
             botMessage.textContent = `Bot: ${getBotResponse(question)}`;
             chatlogs.appendChild(botMessage);
+
+            // '안녕하세요'에 대한 응답 시, 질문 목록을 표시
+            if (question === "안녕하세요") {
+                questionList.style.display = "block"; // 질문 목록 보이기
+            }
+
             chatlogs.scrollTop = chatlogs.scrollHeight;
         }
 
         document.getElementById("clearChatBtn").addEventListener("click", () => {
             document.getElementById("chatlogs").innerHTML = "";
+            document.querySelector(".question-list").style.display = "none"; // 질문 목록 숨기기
         });
 
         // 다양한 질문에 대한 응답 추가
