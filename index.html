@@ -68,7 +68,7 @@
             color: #80b3ff;
             font-weight: bold;
         }
-        .search-container {
+        .search-container, .ai-container {
             display: none;
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.3s ease;
@@ -76,7 +76,7 @@
             width: 90%;
             max-width: 800px;
         }
-        .search-container.show {
+        .search-container.show, .ai-container.show {
             display: block;
             opacity: 1;
             transform: translateY(0);
@@ -135,7 +135,7 @@
                 font-size: 14px;
                 padding: 8px 16px;
             }
-            .search-container {
+            .search-container, .ai-container {
                 width: 95%;
             }
             #chatbot button {
@@ -151,6 +151,7 @@
     <div class="tabs">
         <div class="tab active" data-tab="search">검색</div>
         <div class="tab" data-tab="link">링크 복사</div>
+        <div class="tab" data-tab="ai">AI</div>
     </div>
     <div class="search-container show" id="search">
         <script async src="https://cse.google.com/cse.js?cx=00d831986d20a4627"></script>
@@ -161,12 +162,22 @@
         <p>NaturaLink 링크를 복사하려면 아래 버튼을 클릭하세요.</p>
         <button id="copyBtn">링크 복사</button>
     </div>
+    <div class="ai-container" id="ai">
+        <h2>AI 챗봇</h2>
+        <div id="chatbox">
+            <div id="chatlogs"></div>
+            <div id="userInputContainer">
+                <input type="text" id="userInput" placeholder="메시지를 입력하세요..." />
+                <button id="sendMessageBtn">보내기</button>
+            </div>
+        </div>
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".tab").forEach(tab => {
                 tab.addEventListener("click", function() {
                     const tabId = this.getAttribute("data-tab");
-                    document.querySelectorAll(".search-container").forEach(container => {
+                    document.querySelectorAll(".search-container, .ai-container").forEach(container => {
                         container.classList.remove("show");
                     });
                     document.getElementById(tabId).classList.add("show");
@@ -175,6 +186,7 @@
                 });
             });
         });
+
         document.getElementById("copyBtn").addEventListener("click", () => {
             const link = window.location.href;
             if (navigator.clipboard) {
@@ -188,6 +200,7 @@
                 fallbackCopyText(link);
             }
         });
+
         function fallbackCopyText(text) {
             const tempInput = document.createElement("textarea");
             document.body.appendChild(tempInput);
@@ -197,6 +210,18 @@
             document.body.removeChild(tempInput);
             alert("링크가 복사되었습니다!");
         }
+
+        document.getElementById("sendMessageBtn").addEventListener("click", () => {
+            const userInput = document.getElementById("userInput").value;
+            if (userInput.trim() !== "") {
+                const chatlogs = document.getElementById("chatlogs");
+                const userMessage = document.createElement("div");
+                userMessage.textContent = `You: ${userInput}`;
+                chatlogs.appendChild(userMessage);
+                document.getElementById("userInput").value = "";
+                chatlogs.scrollTop = chatlogs.scrollHeight;
+            }
+        });
     </script>
 </body>
 </html>
